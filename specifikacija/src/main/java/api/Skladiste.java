@@ -3,12 +3,19 @@ package api;
 import java.util.ArrayList;
 
 public class Skladiste {
+	static Skladiste instance=null;
+	
 	static int brojEntiteta=0;
 	static int maxBrojEntiteta;
 	
 	private String putanja;
 	private ArrayList<String> fajlovi;
 	private ArrayList<Entitet> entiteti;
+	
+	private Skladiste() {
+		fajlovi=new ArrayList<String>();
+		entiteti=new ArrayList<Entitet>();
+	}
 	
 	public String getPutanja() {
 		return putanja;
@@ -76,5 +83,12 @@ public class Skladiste {
 	public void konfiguracija(int maxEntiteta) {
 		maxBrojEntiteta=maxEntiteta;
 		return;
+	}
+	
+	public static Skladiste getInstance() {
+		if(instance==null) {
+			instance=new Skladiste();
+		}
+		return instance;
 	}
 }
