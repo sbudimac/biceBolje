@@ -6,6 +6,7 @@ public class Entitet {
 	private String naziv;
 	private String id;
 	private HashMap<String, Object> atributi;
+	private String fajl;
 	
 	public Entitet() {};
 	
@@ -33,6 +34,14 @@ public class Entitet {
 	
 	public HashMap<String, Object> getAtributi() {
 		return atributi;
+	}
+	
+	public String getFajl() {
+		return fajl;
+	}
+	
+	public void setFajl(String fajl) {
+		this.fajl=fajl;
 	}
 	
 	public void setAtributi(HashMap<String, Object> atributi) {

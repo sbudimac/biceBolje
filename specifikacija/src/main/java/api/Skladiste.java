@@ -7,6 +7,7 @@ public class Skladiste {
 	static int maxBrojEntiteta;
 	
 	private String putanja;
+	private ArrayList<String> fajlovi;
 	private ArrayList<Entitet> entiteti;
 	
 	public String getPutanja() {
@@ -15,6 +16,10 @@ public class Skladiste {
 	
 	public void setPutanja(String putanja) {
 		this.putanja=putanja;
+	}
+	
+	public ArrayList<String> getFajlovi(){
+		return fajlovi;
 	}
 	
 	public ArrayList<Entitet> getEntiteti(){

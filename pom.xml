@@ -6,5 +6,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>specifikacija</module>
+  	<module>implementacija-json</module>
   </modules>
 </project>
