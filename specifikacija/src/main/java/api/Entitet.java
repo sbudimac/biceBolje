@@ -55,4 +55,15 @@ public class Entitet {
 	public void obrisiAtribut(String key) {
 		atributi.remove(key);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Entitet) {
+			Entitet entitet=(Entitet)obj;
+			if(this.getId().equals(entitet.getId())){
+				return true;
+			}
+		}
+		return false;
+	}
 }

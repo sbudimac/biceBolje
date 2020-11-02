@@ -1,20 +1,25 @@
 package api;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Skladiste {
 	static Skladiste instance=null;
 	
-	static int brojEntiteta=0;
-	static int maxBrojEntiteta;
+	static int maxBrojEntiteta=3;
+	static int currFileIndex=0;
 	
 	private String putanja;
-	private ArrayList<String> fajlovi;
-	private ArrayList<Entitet> entiteti;
+	
+	private HashMap<String, ArrayList<Entitet>> fajloviEntiteta;
 	
 	private Skladiste() {
-		fajlovi=new ArrayList<String>();
-		entiteti=new ArrayList<Entitet>();
+		fajloviEntiteta=new HashMap<String, ArrayList<Entitet>>();
 	}
 	
 	public String getPutanja() {
@@ -25,47 +30,59 @@ public class Skladiste {
 		this.putanja=putanja;
 	}
 	
-	public ArrayList<String> getFajlovi(){
-		return fajlovi;
+	public HashMap<String, ArrayList<Entitet>> getFajloviEntiteta(){
+		return fajloviEntiteta;
 	}
 	
-	public ArrayList<Entitet> getEntiteti(){
-		return entiteti;
-	}
-	
-	public int dodajEntitet(Entitet entitet) {
-		ArrayList<Entitet> ugnjezdeni=new ArrayList<Entitet>();
-		for (Entitet e : entiteti) {
-			if(e.getId().equals(entitet.getId())){
-				return 0;
-			}
-			for (Object o : e.getAtributi().values()) {
-				if(o instanceof Entitet) {
-					Entitet en=(Entitet)o;
-					ugnjezdeni.add(en);
+	public String dodajEntitet(Entitet entitet) {
+		for (ArrayList<Entitet> e : fajloviEntiteta.values()) {
+			for (Entitet ent : e) {
+				if(ent.getId().equals(entitet.getId())){
+					return null;
+				}
+				for (Object o : ent.getAtributi().values()) {
+					if(o instanceof Entitet) {
+						Entitet en=(Entitet)o;
+						if(ent.getId()==en.getId()) {
+							return null;
+						}
+					}
 				}
 			}
 		}
-		entiteti.add(entitet);
-		brojEntiteta++;
-		entiteti.addAll(ugnjezdeni);
-		brojEntiteta+=ugnjezdeni.size();
-		return 1;
-	}
-	
-	public int naknadnoDodavanje(String idSpoljasnjeg, Entitet ugnjezden, String kljucSpoljasnjeg) {
-		Entitet spoljasnji=null;
-		for (Entitet entitet : entiteti) {
-			if(entitet.getId()==idSpoljasnjeg) {
-				spoljasnji=entitet;
-				break;
+		for(Map.Entry<String, ArrayList<Entitet>> grupaEntiteta : fajloviEntiteta.entrySet()) {
+			if(grupaEntiteta.getValue().size()<maxBrojEntiteta) {
+				grupaEntiteta.getValue().add(entitet);
+				return grupaEntiteta.getKey();
 			}
 		}
-		if(spoljasnji!=null) {
-			spoljasnji.getAtributi().put(kljucSpoljasnjeg, spoljasnji);
-			return 0;
+		Path filePath=Paths.get(putanja, "BiceBolje"+currFileIndex);
+		currFileIndex++;
+		File file=new File(filePath.toString());
+		try {
+			if(file.createNewFile()) {
+				fajloviEntiteta.put(filePath.toString(), new ArrayList<Entitet>());
+				fajloviEntiteta.get(filePath.toString()).add(entitet);
+				return filePath.toString();
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
-		return 1;
+		return null;
+	}
+	
+	public String naknadnoDodavanje(String idSpoljasnjeg, Entitet ugnjezden, String kljucSpoljasnjeg) {
+		Entitet spoljasnji=null;
+		for (Map.Entry<String, ArrayList<Entitet>> grupaEntiteta : fajloviEntiteta.entrySet()) {
+			for (Entitet ent : grupaEntiteta.getValue()) {
+				if(ent.getId()==idSpoljasnjeg){
+					spoljasnji=ent;
+					spoljasnji.getAtributi().put(kljucSpoljasnjeg, spoljasnji);
+					return grupaEntiteta.getKey();
+				}
+			}
+		}
+		return null;
 	}
 	
 	public void pretraga(String uslovi) {

@@ -1,5 +1,5 @@
 package api;
 
 public enum TipFajla {
-	JSON, XML, CUSTOM
+	JSON, XML, CUSTOM, INVALID
 }

@@ -1,6 +1,12 @@
 package crudXML;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import api.AbstractOperator;
@@ -10,9 +16,17 @@ import api.Skladiste;
 public class XMLOperator extends AbstractOperator {
 
 	@Override
-	public void kreirajSkladiste(String putanja, Skladiste skladiste) {
-		// TODO Auto-generated method stub
-		
+	public void kreirajSkladiste(Skladiste skladiste) {
+		for (Map.Entry<String, ArrayList<Entitet>> grupaEntiteta : skladiste.getFajloviEntiteta().entrySet()) {
+			try {
+				XmlMapper xmlMapper=new XmlMapper();
+				xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+				xmlMapper.writeValue(new File(grupaEntiteta.getKey()), grupaEntiteta.getValue());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return;
 	}
 
 	@Override
@@ -34,7 +48,7 @@ public class XMLOperator extends AbstractOperator {
 	}
 
 	@Override
-	public void prevodEntiteta(Entitet entitet) {
+	public void prevediEntitet(Entitet entitet) {
 		XmlMapper xmlMapper=new XmlMapper();
 		try {
 			System.out.println(xmlMapper.writeValueAsString(entitet));
