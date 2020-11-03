@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Skladiste {
@@ -85,16 +87,39 @@ public class Skladiste {
 		return null;
 	}
 	
-	public void pretraga(String uslovi) {
+	public List<Map.Entry<Entitet, String>> pretraga(List<Uslov> uslovi) {
+		List<Map.Entry<Entitet, String>> rezultat=new ArrayList<>();
+		for (Map.Entry<String, ArrayList<Entitet>> grupaEntiteta : fajloviEntiteta.entrySet()) {
+			for (Entitet entitet : grupaEntiteta.getValue()) {
+				boolean ispunjava=true;
+				for (Uslov uslov : uslovi) {
+					if(!(uslov.poredi(entitet))) {
+						ispunjava=false;
+						break;
+					}
+				}
+				if(ispunjava) {
+					rezultat.add(new AbstractMap.SimpleEntry<Entitet, String>(entitet, grupaEntiteta.getKey()));
+				}
+			}
+		}
+		return rezultat;
+	}
+	
+	public void sortiranje(List<Uslov> uslovi) {
 		
 	}
 	
-	public void sortiranje(String uslovi) {
-		
-	}
-	
-	public void brisanje(String uslovi) {
-		
+	public void brisanje(List<Uslov> uslovi) {
+		List<Map.Entry<Entitet, String>> rezultat=pretraga(uslovi);
+		for (Map.Entry<Entitet, String> entitet : rezultat) {
+			fajloviEntiteta.get(entitet.getValue()).remove(entitet.getKey());
+			if(fajloviEntiteta.get(entitet.getValue()).size()<=0) {
+				fajloviEntiteta.remove(entitet.getValue());
+				File file=new File(entitet.getValue());
+				file.delete();
+			}
+		}
 	}
 	
 	public void konfiguracija(int maxEntiteta) {

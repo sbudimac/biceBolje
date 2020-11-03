@@ -1,8 +1,14 @@
 package app;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import api.AbstractOperator;
 import api.Entitet;
+import api.Operacija;
 import api.Skladiste;
+import api.Uslov;
 import crudXML.XMLOperator;
 
 public class Main /*extends Application*/ {
@@ -20,12 +26,18 @@ public class Main /*extends Application*/ {
 		gale.getAtributi().put("Indeks", "RN2/18");
 		gale.getAtributi().put("Smer", "Racunarske nauke");
 		Entitet cmoki=new Entitet("Cmoki", "gospoda");
-		cmoki.getAtributi().put("Indeks", "RN4/18");
-		cmoki.getAtributi().put("Smer", "Racunarske nauke");
+		cmoki.getAtributi().put("Indeks", "RI4/18");
+		cmoki.getAtributi().put("Smer", "Racunarsko inzenjerstvo");
 		Skladiste.getInstance().dodajEntitet(gupsi);
 		Skladiste.getInstance().dodajEntitet(buda);
 		Skladiste.getInstance().dodajEntitet(gale);
 		Skladiste.getInstance().dodajEntitet(cmoki);
+		Uslov uslov=new Uslov("Indeks", Operacija.POCINJE_SA, "RI");
+		List<Uslov> uslovi=new ArrayList<>();
+		uslovi.add(uslov);
+		List<Map.Entry<Entitet, String>> rez=Skladiste.getInstance().pretraga(uslovi);
+		System.out.println(rez);
+		Skladiste.getInstance().brisanje(uslovi);
 		AbstractOperator operator=new XMLOperator();
 		operator.kreirajSkladiste(Skladiste.getInstance());
 	}
