@@ -2,7 +2,6 @@ package app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import api.AbstractOperator;
 import api.Entitet;
@@ -17,17 +16,17 @@ public class Main /*extends Application*/ {
 		//launch(args);
 		Skladiste.getInstance().setPutanja("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente");
 		Entitet gupsi=new Entitet("Gupsi", "ooooo");
-		gupsi.getAtributi().put("Indeks", "RN3/18");
-		gupsi.getAtributi().put("Smer", "Racunarske nauke");
+		gupsi.dodajAtribut("Indeks", "RN3/18");
+		gupsi.dodajAtribut("Smer", "Racunarske nauke");
 		Entitet buda=new Entitet("Buda", "meathead");
-		buda.getAtributi().put("Indeks", "RN5/18");
-		buda.getAtributi().put("Smer", "Racunarske nauke");
+		buda.dodajAtribut("Indeks", "RN5/18");
+		buda.dodajAtribut("Smer", "Racunarske nauke");
 		Entitet gale=new Entitet("Gale", "stipendista");
-		gale.getAtributi().put("Indeks", "RN2/18");
-		gale.getAtributi().put("Smer", "Racunarske nauke");
+		gale.dodajAtribut("Indeks", "RN2/18");
+		gale.dodajAtribut("Smer", "Racunarske nauke");
 		Entitet cmoki=new Entitet("Cmoki", "gospoda");
-		cmoki.getAtributi().put("Indeks", "RI4/18");
-		cmoki.getAtributi().put("Smer", "Racunarsko inzenjerstvo");
+		cmoki.dodajAtribut("Indeks", "RI4/18");
+		cmoki.dodajAtribut("Smer", "Racunarsko inzenjerstvo");
 		Skladiste.getInstance().dodajEntitet(gupsi);
 		Skladiste.getInstance().dodajEntitet(buda);
 		Skladiste.getInstance().dodajEntitet(gale);
@@ -35,7 +34,7 @@ public class Main /*extends Application*/ {
 		Uslov uslov=new Uslov("Indeks", Operacija.POCINJE_SA, "RI");
 		List<Uslov> uslovi=new ArrayList<>();
 		uslovi.add(uslov);
-		List<Map.Entry<Entitet, String>> rez=Skladiste.getInstance().pretraga(uslovi);
+		List<Entitet> rez=Skladiste.getInstance().pretraga(uslovi);
 		System.out.println(rez);
 		Skladiste.getInstance().brisanje(uslovi);
 		AbstractOperator operator=new XMLOperator();

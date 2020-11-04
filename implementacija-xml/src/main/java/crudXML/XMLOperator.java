@@ -3,6 +3,7 @@ package crudXML;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,11 +18,12 @@ public class XMLOperator extends AbstractOperator {
 
 	@Override
 	public void kreirajSkladiste(Skladiste skladiste) {
-		for (Map.Entry<String, ArrayList<Entitet>> grupaEntiteta : skladiste.getFajloviEntiteta().entrySet()) {
+		for(String fajl : skladiste.getFajloviEntiteta().keySet()) {
+			List<Entitet> entiteti=skladiste.getForFile(fajl);
 			try {
 				XmlMapper xmlMapper=new XmlMapper();
 				xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-				xmlMapper.writeValue(new File(grupaEntiteta.getKey()), grupaEntiteta.getValue());
+				xmlMapper.writeValue(new File(fajl), entiteti);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

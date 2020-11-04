@@ -8,8 +8,7 @@ import api.Entitet;
 import api.Skladiste;
 import api.TipFajla;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,11 +17,12 @@ import java.io.Writer;
 public class JsonOperator extends AbstractOperator {
 	@Override
 	public void kreirajSkladiste(Skladiste skladiste) {
-		for (Map.Entry<String, ArrayList<Entitet>> grupaEntiteta : skladiste.getFajloviEntiteta().entrySet()) {
+		for (String fajl : skladiste.getFajloviEntiteta().keySet()) {
+			List<Entitet> entiteti=skladiste.getForFile(fajl);
 			try {
-				Writer writer=new FileWriter(new File(grupaEntiteta.getKey()));
+				Writer writer=new FileWriter(new File(fajl));
 				Gson gson = new GsonBuilder().setPrettyPrinting().create();
-				gson.toJson(grupaEntiteta.getValue(), writer);
+				gson.toJson(entiteti, writer);
 				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();

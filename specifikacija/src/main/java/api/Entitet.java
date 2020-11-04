@@ -1,12 +1,14 @@
 package api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Entitet {
 	private String naziv;
 	private String id;
-	private HashMap<String, Object> atributi;
-	private String fajl;
+	private Map<String, Object> atributi;
 	
 	public Entitet() {};
 	
@@ -20,32 +22,22 @@ public class Entitet {
 		return naziv;
 	}
 	
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
-	
 	public String getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
-		this.id = id;
+	public Object getAtribut(String kljuc) {
+		return atributi.get(kljuc);
 	}
 	
-	public HashMap<String, Object> getAtributi() {
-		return atributi;
-	}
-	
-	public String getFajl() {
-		return fajl;
-	}
-	
-	public void setFajl(String fajl) {
-		this.fajl=fajl;
-	}
-	
-	public void setAtributi(HashMap<String, Object> atributi) {
-		this.atributi = atributi;
+	public List<Entitet> getUgnjezdeni(){
+		List<Entitet> ugnjezdeni=new ArrayList<>();
+		for (Object atribut : atributi.keySet()) {
+			if(atribut instanceof Entitet) {
+				ugnjezdeni.add((Entitet)atribut);
+			}
+		}
+		return ugnjezdeni;
 	}
 	
 	public void dodajAtribut(String key, Object value) {

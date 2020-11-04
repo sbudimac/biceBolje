@@ -44,7 +44,7 @@ public class Uslov {
 		}else if(this.kljuc=="id") {
 			value=entitet.getId();
 		}else {
-			value=entitet.getAtributi().get(this.kljuc);
+			value=entitet.getAtribut(this.kljuc);
 		}
 		if(value==null) {
 			return false;
@@ -63,7 +63,7 @@ public class Uslov {
 					return false;
 				}
 			case MANJE:
-				if(value instanceof Integer || value instanceof Float || value instanceof Double) {
+				if(value instanceof Number && vrednost instanceof Number) {
 					if((Double)value<(Double)vrednost) {
 						return true;
 					}else {
@@ -73,7 +73,7 @@ public class Uslov {
 					return false;
 				}
 			case VECE:
-				if(value instanceof Integer || value instanceof Float || value instanceof Double) {
+				if(value instanceof Number && vrednost instanceof Number) {
 					if((Double)value>(Double)vrednost) {
 						return true;
 					}else {
@@ -83,7 +83,7 @@ public class Uslov {
 					return false;
 				}
 			case MANJE_JEDNAKO:
-				if(value instanceof Integer || value instanceof Float || value instanceof Double) {
+				if(value instanceof Number && vrednost instanceof Number) {
 					if((Double)value<=(Double)vrednost) {
 						return true;
 					}else {
@@ -93,7 +93,7 @@ public class Uslov {
 					return false;
 				}
 			case VECE_JEDNAKO:
-				if(value instanceof Integer || value instanceof Float || value instanceof Double) {
+				if(value instanceof Number && vrednost instanceof Number) {
 					if((Double)value>=(Double)vrednost) {
 						return true;
 					}else {
@@ -103,7 +103,7 @@ public class Uslov {
 					return false;
 				}
 			case SADRZI:
-				if(value instanceof String) {
+				if(value instanceof String && vrednost instanceof String) {
 					if(value.toString().contains(this.vrednost.toString())) {
 						return true;
 					}else {
@@ -113,7 +113,7 @@ public class Uslov {
 					return false;
 				}
 			case POCINJE_SA:
-				if(value instanceof String) {
+				if(value instanceof String && vrednost instanceof String) {
 					if(value.toString().startsWith(this.vrednost.toString())) {
 						return true;
 					}else {
@@ -123,7 +123,7 @@ public class Uslov {
 					return false;
 				}
 			case ZAVRSAVA_SA:
-				if(value instanceof String) {
+				if(value instanceof String && vrednost instanceof String) {
 					if(value.toString().endsWith(this.vrednost.toString())) {
 						return true;
 					}else {
