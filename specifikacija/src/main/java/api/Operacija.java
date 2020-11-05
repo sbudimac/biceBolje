@@ -7,16 +7,16 @@ public enum Operacija {
 	NIJE_JEDNAKO("NIJE JEDNAKO", Tip.SVI),
 	MANJE("MANJE OD", Tip.BROJ),
 	VECE("VECE OD", Tip.BROJ),
-	VECE_JEDNAKO("VECE ILI JEDNAKO OD", Tip.BROJ),
-	MANJE_JEDNAKO("MANJE ILI JEDNAKO OD", Tip.BROJ),
-	SADRZI("SADRZI", Tip.TEKST),
-	POCINJE_SA("POCINJE SA", Tip.TEKST),
-	ZAVRSAVA_SA("ZAVRSAVA SE SA", Tip.TEKST);
+	VECE_JEDNAKO("VECE ILI JEDNAKO OD", Tip.BROJDATUMVREME),
+	MANJE_JEDNAKO("MANJE ILI JEDNAKO OD", Tip.BROJDATUMVREME),
+	SADRZI("SADRZI", Tip.TEKSTENTITET),
+	POCINJE_SA("POCINJE SA", Tip.TEKSTENTITET),
+	ZAVRSAVA_SA("ZAVRSAVA SE SA", Tip.TEKSTENTITET);
 	
 	private final String tekstualniOblik;
 	private final Tip tip;
 	
-	Operacija(String tekstualniOblik, Tip tip){
+	private Operacija(String tekstualniOblik, Tip tip){
 		this.tekstualniOblik=tekstualniOblik;
 		this.tip=tip;
 	}

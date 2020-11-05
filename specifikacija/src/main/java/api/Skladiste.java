@@ -2,8 +2,6 @@ package api;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,21 +51,20 @@ public class Skladiste {
 				return null;
 			}
 		}
+		entiteti.add(entitet);
 		for(Map.Entry<String, List<String>> grupaEntiteta : fajloviEntiteta.entrySet()) {
 			if(grupaEntiteta.getValue().size()<maxBrojEntiteta) {
 				grupaEntiteta.getValue().add(entitet.getId());
-				entiteti.add(entitet);
 				return grupaEntiteta.getKey();
 			}
 		}
-		Path filePath=Paths.get(putanja, "BiceBolje"+currFileIndex);
+		File file=new File(putanja, "BiceBolje" + currFileIndex);
 		currFileIndex++;
-		File file=new File(filePath.toString());
 		try {
 			if(file.createNewFile()) {
-				fajloviEntiteta.put(filePath.toString(), new ArrayList<String>());
-				fajloviEntiteta.get(filePath.toString()).add(entitet.getId());
-				return filePath.toString();
+				fajloviEntiteta.put(file.toString(), new ArrayList<String>());
+				fajloviEntiteta.get(file.toString()).add(entitet.getId());
+				return file.toString();
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -84,10 +81,10 @@ public class Skladiste {
 		return null;
 	}
 	
-	public String naknadnoDodavanje(String idSpoljasnjeg, Entitet ugnjezden, String kljucSpoljasnjeg) {
+	public String naknadnoDodaj(String idSpoljasnjeg, Entitet ugnjezden, String kljucSpoljasnjeg) {
 		Entitet spoljasnji=null;
 		for (Entitet entitet : entiteti) {
-			if(entitet.getId()==idSpoljasnjeg){
+			if(entitet.getId().equals(idSpoljasnjeg)){
 				spoljasnji=entitet;
 				spoljasnji.dodajAtribut(kljucSpoljasnjeg, spoljasnji);
 				return fajlEntiteta(spoljasnji);
@@ -96,7 +93,7 @@ public class Skladiste {
 		return null;
 	}
 	
-	public List<Entitet> pretraga(List<Uslov> uslovi) {
+	public List<Entitet> pretrazi(List<Uslov> uslovi) {
 		List<Entitet> rezultat=new ArrayList<>();
 		for (Entitet entitet : entiteti) {
 			boolean ispunjava=true;
@@ -113,13 +110,13 @@ public class Skladiste {
 		return rezultat;
 	}
 	
-	public List<Entitet> sortiranje(List<String> kriterijumi, List<Entitet> entiteti) {
+	public List<Entitet> sortiraj(List<String> kriterijumi, List<Entitet> entiteti) {
 		Collections.sort(entiteti, new EntitetKomparator(kriterijumi));
 		return entiteti;
 	}
 	
-	public void brisanje(List<Uslov> uslovi) {
-		List<Entitet> rezultat=pretraga(uslovi);
+	public void brisi(List<Uslov> uslovi) {
+		List<Entitet> rezultat=pretrazi(uslovi);
 		for (Entitet entitet : rezultat) {
 			entiteti.remove(entitet);
 			String fajl=fajlEntiteta(entitet);
@@ -132,9 +129,8 @@ public class Skladiste {
 		}
 	}
 	
-	public void konfiguracija(int maxEntiteta) {
+	public void setKonfiguracija(int maxEntiteta) {
 		maxBrojEntiteta=maxEntiteta;
-		return;
 	}
 	
 	public static Skladiste getInstance() {
