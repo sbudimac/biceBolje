@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public class Skladiste {
-	static Skladiste instance=null;
-	
+public class Skladiste {	
 	static int maxBrojEntiteta=3;
 	static int currFileIndex=0;
 	
@@ -19,7 +19,13 @@ public class Skladiste {
 	private List<Entitet> entiteti;
 	private Map<String, List<String>> fajloviEntiteta;
 	
-	private Skladiste() {
+	public Skladiste() {
+		entiteti=new ArrayList<>();
+		fajloviEntiteta=new HashMap<String, List<String>>();
+	}
+	
+	public Skladiste(String putanja) {
+		this.putanja=putanja;
 		entiteti=new ArrayList<>();
 		fajloviEntiteta=new HashMap<String, List<String>>();
 	}
@@ -32,6 +38,10 @@ public class Skladiste {
 		this.putanja=putanja;
 	}
 	
+	public List<Entitet> getEntiteti(){
+		return entiteti;
+	}
+	
 	public List<Entitet> getForFile(String fajl) {
 		List<Entitet> fajlEntiteti=new ArrayList<>();
 		for (Entitet entitet : entiteti) {
@@ -42,13 +52,24 @@ public class Skladiste {
 		return fajlEntiteti;
 	}
 	
+	public void nalepiEntitete(List<Entitet> entiteti, String fajl) {
+		this.entiteti.addAll(entiteti);
+		List<String> ids=new ArrayList<>();
+		for (Entitet entitet : entiteti) {
+			ids.add(entitet.getId());
+		}
+		fajloviEntiteta.put(fajl, ids);
+	}
+	
 	public String dodajEntitet(Entitet entitet) {
 		for (Entitet e : entiteti) {
 			if(e.getId().equals(entitet.getId())){
 				return null;
 			}
-			if(e.getUgnjezdeni().contains(entitet)) {
-				return null;
+			if(e.nadjiUgnjezdene()!=null) {
+				if(e.nadjiUgnjezdene().contains(entitet)) {
+					return null;
+				}
 			}
 		}
 		entiteti.add(entitet);
@@ -115,8 +136,9 @@ public class Skladiste {
 		return entiteti;
 	}
 	
-	public void brisi(List<Uslov> uslovi) {
+	public Set<String> brisi(List<Uslov> uslovi) {
 		List<Entitet> rezultat=pretrazi(uslovi);
+		Set<String> fajlovi=new HashSet<>();
 		for (Entitet entitet : rezultat) {
 			entiteti.remove(entitet);
 			String fajl=fajlEntiteta(entitet);
@@ -125,21 +147,17 @@ public class Skladiste {
 				fajloviEntiteta.remove(fajl);
 				File file=new File(fajl);
 				file.delete();
+			}else {
+				fajlovi.add(fajl);
 			}
 		}
+		return fajlovi;
 	}
 	
 	public void setKonfiguracija(int maxEntiteta) {
 		maxBrojEntiteta=maxEntiteta;
 	}
 	
-	public static Skladiste getInstance() {
-		if(instance==null) {
-			instance=new Skladiste();
-		}
-		return instance;
-	}
-
 	public Map<String, List<String>> getFajloviEntiteta() {
 		return fajloviEntiteta;
 	}

@@ -26,18 +26,25 @@ public class Entitet {
 		return id;
 	}
 	
+	public Map<String, Object> getAtributi(){
+		return atributi;
+	}
+	
 	public Object getAtribut(String kljuc) {
 		return atributi.get(kljuc);
 	}
 	
-	public List<Entitet> getUgnjezdeni(){
+	public List<Entitet> nadjiUgnjezdene(){
 		List<Entitet> ugnjezdeni=new ArrayList<>();
 		for (Object atribut : atributi.values()) {
 			if(atribut instanceof Entitet) {
 				ugnjezdeni.add((Entitet)atribut);
 			}
 		}
-		return ugnjezdeni;
+		if(ugnjezdeni.size()!=0) {
+			return ugnjezdeni;
+		}
+		return null;
 	}
 	
 	public void dodajAtribut(String key, Object value) {

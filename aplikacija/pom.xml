@@ -14,7 +14,7 @@
   	</dependency>
   	<dependency>
   		<groupId>com.komponente</groupId>
-  		<artifactId>implementacija-xml</artifactId>
+  		<artifactId>implementacija-yaml</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>

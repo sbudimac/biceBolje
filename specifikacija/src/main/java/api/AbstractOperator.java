@@ -1,35 +1,37 @@
 package api;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.List;
 
 public abstract class AbstractOperator {
+	protected Skladiste skladiste;
+		
+	public AbstractOperator(String putanja) {
+		skladiste=ucitajSkladiste(putanja);
+	}
+	
+	public List<Entitet> getEntiteti(){
+		return skladiste.getEntiteti();
+	}
+	
+	public List<Entitet> pretrazi(List<Uslov> uslovi) {
+		return skladiste.pretrazi(uslovi);
+	}
+	
+	public abstract void brisi(List<Uslov> uslovi) ;
+	
+	public List<Entitet> sortiraj(List<String> kriterijumi, List<Entitet> entiteti){
+		return skladiste.sortiraj(kriterijumi, entiteti);
+	}
+	
 	public abstract void kreirajSkladiste(Skladiste skladiste);
 	
 	public abstract Skladiste ucitajSkladiste(String putanja);
 	
-	public abstract void izmeniSkladiste(String putanja, Skladiste skladiste);
-	
-	public abstract void izbrisiSkladiste(String putanja, Skladiste skladiste);
-	
 	public abstract void prevediEntitet(Entitet entitet);
 	
-	public TipFajla proveriTip(String putanja) {
-		File file=new File(putanja);
-		TipFajla tip=TipFajla.INVALID;
-		try {
-			Scanner reader=new Scanner(file);
-			String fileStart=reader.nextLine();
-			if(fileStart.charAt(0)=='{') {
-				tip=TipFajla.JSON;
-			}else if (fileStart.charAt(0)=='<') {
-				tip=TipFajla.XML;
-			}
-			reader.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return tip;
-	}
+	protected abstract boolean validanFajl(String putanja);
+	
+	public abstract void dodajEntitet(Entitet entitet);
+		
+	public abstract void izmeniEntitet(Entitet entitet, String kljuc, String vrednost);
 }

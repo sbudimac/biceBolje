@@ -9,13 +9,14 @@ import api.Operacija;
 import api.Skladiste;
 import api.Uslov;
 import api.UslovFactory;
-import crudXML.XMLOperator;
+import crudJson.JsonOperator;
+import crudYaml.YamlOperator;
 
 public class Main /*extends Application*/ {
 
 	public static void main(String[] args) {
 		//launch(args);
-		Skladiste.getInstance().setPutanja("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente");
+		Skladiste skladiste=new Skladiste("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente");
 		Entitet gupsi=new Entitet("Gupsi", "ooooo");
 		gupsi.dodajAtribut("Indeks", "RN3/18");
 		gupsi.dodajAtribut("Smer", "Racunarske nauke");
@@ -32,32 +33,42 @@ public class Main /*extends Application*/ {
 		cmoki.dodajAtribut("Indeks", "RI4/18");
 		cmoki.dodajAtribut("Smer", "Racunarsko inzenjerstvo");
 		cmoki.dodajAtribut("Ocena", 6);
-		Skladiste.getInstance().dodajEntitet(gupsi);
-		Skladiste.getInstance().dodajEntitet(buda);
-		Skladiste.getInstance().dodajEntitet(gale);
-		Skladiste.getInstance().dodajEntitet(cmoki);
-		//Uslov uslov=n("Indeks", Operacija.POCINJE_SA, "RI");
+		
+		
+		AbstractOperator operator=new YamlOperator("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\testovi");
+		//AbstractOperator operator=new YamlOperator("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente");
+		
+		//operator.prevediEntitet(cmoki);
+		//operator.kreirajSkladiste(Skladiste.getInstance());
+		
+		/*
+		operator.dodajEntitet(gupsi);
+		operator.dodajEntitet(buda);
+		operator.dodajEntitet(gale);
+		operator.dodajEntitet(cmoki);
+		*/
+		
+		for (Entitet entitet : operator.getEntiteti()) {
+			operator.prevediEntitet(entitet);
+		}
 		
 		Uslov uslov = UslovFactory.KreirajUslov("Indeks", Operacija.POCINJE_SA, "RI");
 		List<Uslov> uslovi=new ArrayList<>();
 		
 		uslovi.add(uslov);
-		List<Entitet> rez=Skladiste.getInstance().pretrazi(uslovi);
+		List<Entitet> rez=operator.pretrazi(uslovi);
 		
 		uslovi.clear();
-		Uslov uslov2 = UslovFactory.KreirajUslov("Ocena", Operacija.VECE_JEDNAKO, "6");
+		Uslov uslov2 = UslovFactory.KreirajUslov("Ocena", Operacija.JEDNAKO, "5");
 		uslovi.add(uslov2);
-		rez=Skladiste.getInstance().pretrazi(uslovi);
+		rez=operator.pretrazi(uslovi);
 		List<String> kriterijumi = new ArrayList<>();
 		kriterijumi.add("Ocena");
-		Skladiste.getInstance().sortiraj(kriterijumi, rez);
+		operator.sortiraj(kriterijumi, rez);
 		for(Entitet e : rez) {
 			System.out.println(e.getId());
 		}
-		
-		Skladiste.getInstance().brisi(uslovi);
-		AbstractOperator operator=new XMLOperator();
-		operator.kreirajSkladiste(Skladiste.getInstance());
+		operator.brisi(uslovi);
 	}
 
 	/*@Override
