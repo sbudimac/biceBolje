@@ -4,9 +4,9 @@ import java.util.List;
 
 public abstract class AbstractOperator {
 	protected Skladiste skladiste;
+	
+	public AbstractOperator() {
 		
-	public AbstractOperator(String putanja) {
-		skladiste=ucitajSkladiste(putanja);
 	}
 	
 	public List<Entitet> getEntiteti(){
@@ -23,15 +23,11 @@ public abstract class AbstractOperator {
 		return skladiste.sortiraj(kriterijumi, entiteti);
 	}
 	
-	public abstract void kreirajSkladiste(Skladiste skladiste);
-	
-	public abstract Skladiste ucitajSkladiste(String putanja);
-	
-	public abstract void prevediEntitet(Entitet entitet);
-	
-	protected abstract boolean validanFajl(String putanja);
+	public abstract void ucitajSkladiste();
 	
 	public abstract void dodajEntitet(Entitet entitet);
+	
+	public abstract void naknadnoDodaj(String idSpoljasnjeg, String kljucSpoljasnjeg, Entitet ugnjezden);
 		
 	public abstract void izmeniEntitet(Entitet entitet, String kljuc, String vrednost);
 }
