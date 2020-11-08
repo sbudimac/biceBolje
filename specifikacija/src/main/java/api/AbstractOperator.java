@@ -1,12 +1,17 @@
 package api;
 
 import java.util.List;
+import java.util.Set;
 
 public abstract class AbstractOperator {
 	protected Skladiste skladiste;
 	
 	public AbstractOperator() {
 		
+	}
+	
+	public Set<String> getKljucevi() {
+		return skladiste.getKljucevi();
 	}
 	
 	public List<Entitet> getEntiteti(){

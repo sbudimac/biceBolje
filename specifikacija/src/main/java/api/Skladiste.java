@@ -2,17 +2,25 @@ package api;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Skladiste {	
 	private List<Entitet> entiteti;
+	private Set<String> kljucevi;
 	
 	public Skladiste() {
 		entiteti=new ArrayList<>();
+		kljucevi=new HashSet<>();
 	}
 	
 	public List<Entitet> getEntiteti(){
 		return entiteti;
+	}
+	
+	public Set<String> getKljucevi(){
+		return kljucevi;
 	}
 	
 	public void nalepiEntitete(List<Entitet> entiteti) {
@@ -31,6 +39,7 @@ public class Skladiste {
 			}
 		}
 		entiteti.add(entitet);
+		kljucevi.addAll(entitet.getAtributi().keySet());
 		return 0;
 	}
 	
