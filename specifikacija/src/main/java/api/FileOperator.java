@@ -44,7 +44,7 @@ public abstract class FileOperator extends AbstractOperator {
 	
 	public abstract void prevediEntitet(Entitet entitet);
 	
-	protected abstract void ispisiFajl(File fajl);
+	protected abstract void ispisiFajl(Path putanjaFajla);
 	
 	protected Path fajlEntiteta(Entitet ent) {
 		for(Map.Entry<Path, List<Entitet>> grupaEntiteta : fajloviEntiteta.entrySet()) {
@@ -76,18 +76,17 @@ public abstract class FileOperator extends AbstractOperator {
 		for(Map.Entry<Path, List<Entitet>> grupaEntiteta : fajloviEntiteta.entrySet()) {
 			if(grupaEntiteta.getValue().size()<maxBrojEntiteta) {
 				grupaEntiteta.getValue().add(entitet);
-				putanjaFajla = putanja.resolve(grupaEntiteta.getKey());
-				ispisiFajl(putanjaFajla.toFile());
+				ispisiFajl(grupaEntiteta.getKey());
 				return;
 			}
 		}
-		putanjaFajla = putanja.resolve(Paths.get("BiceBolje" + currFileIndex));
+		putanjaFajla = Paths.get("BiceBolje" + currFileIndex);
 		currFileIndex++;
 		try {
-			if(putanjaFajla.toFile().createNewFile()) {
+			if(putanja.resolve(putanjaFajla).toFile().createNewFile()) {
 				fajloviEntiteta.put(putanjaFajla, new ArrayList<Entitet>());
 				fajloviEntiteta.get(putanjaFajla).add(entitet);
-				ispisiFajl(putanjaFajla.toFile());
+				ispisiFajl(putanjaFajla);
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -99,7 +98,7 @@ public abstract class FileOperator extends AbstractOperator {
 		int rezultat = skladiste.naknadnoDodaj(idSpoljasnjeg, kljucSpoljasnjeg, ugnjezden);
 		if(rezultat != 0) return;
 		Path putanjaFajla = fajlEntiteta(idSpoljasnjeg);
-		ispisiFajl(putanjaFajla.toFile());
+		ispisiFajl(putanjaFajla);
 	}
 	
 	@Override
@@ -116,9 +115,9 @@ public abstract class FileOperator extends AbstractOperator {
 			fajloviEntiteta.get(putanjaFajla).remove(entitet);
 			if(fajloviEntiteta.get(putanjaFajla).size()<=0) {
 				fajloviEntiteta.remove(putanjaFajla);
-				putanjaFajla.toFile().delete();
+				putanja.resolve(putanjaFajla).toFile().delete();
 			}else {
-				ispisiFajl(putanjaFajla.toFile());
+				ispisiFajl(putanjaFajla);
 			}
 		}
 	}

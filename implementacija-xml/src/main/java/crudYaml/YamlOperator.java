@@ -73,9 +73,9 @@ public class YamlOperator extends FileOperator {
 	}
 
 	@Override
-	protected void ispisiFajl(File fajl) {
+	protected void ispisiFajl(Path putanjaFajla) {
 		try {
-			om.writeValue(fajl, fajloviEntiteta.get(fajl.toPath()));
+			om.writeValue(putanja.resolve(putanjaFajla).toFile(), fajloviEntiteta.get(putanjaFajla));
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

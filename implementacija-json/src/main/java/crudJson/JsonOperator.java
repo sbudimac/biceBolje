@@ -66,10 +66,10 @@ public class JsonOperator extends FileOperator {
 	}
 
 	@Override
-	protected void ispisiFajl(File fajl) {
+	protected void ispisiFajl(Path putanjaFajla) {
 		try {
-			Writer writer=new FileWriter(fajl, false);
-			gson.toJson(fajloviEntiteta.get(fajl.toPath()), writer);
+			Writer writer=new FileWriter(putanja.resolve(putanjaFajla).toFile(), false);
+			gson.toJson(fajloviEntiteta.get(putanjaFajla), writer);
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
