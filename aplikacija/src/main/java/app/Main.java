@@ -11,11 +11,18 @@ import api.Uslov;
 import api.UslovFactory;
 import crudJson.JsonOperator;
 import crudYaml.YamlOperator;
+import gui.MainView;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main /*extends Application*/ {
+public class Main extends Application {
 
 	public static void main(String[] args) {
-		//launch(args);
+		launch(args);
+		
+		
+		
+		/*
 		FileOperator operator=new JsonOperator("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\testovi");
 		//FileOperator operator=new YamlOperator("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\testovi");
 		
@@ -64,11 +71,12 @@ public class Main /*extends Application*/ {
 			operator.prevediEntitet(entitet);
 		}
 		operator.brisi(uslovi);
+		*/
 	}
 
-	/*@Override
+	@Override
 	public void start(Stage primaryStage) throws Exception {
 		MainView.getInstance();
-	}*/
+	}
 
 }
