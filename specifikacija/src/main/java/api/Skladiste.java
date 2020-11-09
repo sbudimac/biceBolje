@@ -25,6 +25,9 @@ public class Skladiste {
 	
 	public void nalepiEntitete(List<Entitet> entiteti) {
 		this.entiteti.addAll(entiteti);
+		for (Entitet e : entiteti) {
+			kljucevi.addAll(e.getAtributi().keySet());
+		}
 	}
 	
 	public int dodajEntitet(Entitet entitet) {

@@ -18,10 +18,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	public static void main(String[] args) {
-		launch(args);
 		
 		
-		/*FileOperator operator=new JsonOperator("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\testovi");
+		
+		FileOperator operator=new JsonOperator("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\testovi");
 
         Entitet gupsi=new Entitet("Gupsi", "ooooo");
         gupsi.dodajAtribut("Indeks", "RN3/18");
@@ -57,8 +57,8 @@ public class Main extends Application {
         List<String> kriterijumi = new ArrayList<>();
         kriterijumi.add("Ocena");
         operator.sortiraj(kriterijumi, rez);
-        //operator.brisi(uslovi);*/
-		
+        //operator.brisi(uslovi);
+		launch(args);
 	}
 
 	@Override
