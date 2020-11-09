@@ -7,6 +7,7 @@ import java.util.List;
 
 import api.Entitet;
 import api.FileOperator;
+import controller.UcitajAtributeAction;
 import controller.UcitajSkladisteAction;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -71,6 +72,7 @@ public class MainView extends Stage {
 			imgView.setFitHeight(30);
 			imgView.setFitWidth(30);
 			ucitajAtribute.setGraphic(imgView);
+			ucitajAtribute.setOnAction(new UcitajAtributeAction());
 			input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\add.png");
 			img=new Image(input);
 			imgView=new ImageView(img);
