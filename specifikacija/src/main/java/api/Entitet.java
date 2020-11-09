@@ -1,5 +1,6 @@
 package api;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -78,5 +79,14 @@ public class Entitet {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		String polja="";
+		for(Map.Entry<String, Object> atribut : atributi.entrySet()) {
+			polja+="Kljuc: "+atribut.getKey()+" Vrednost: "+atribut.getValue();
+		}
+		return "Naziv: "+this.naziv+" Id: "+this.id+" Atributi: "+polja; 
 	}
 }

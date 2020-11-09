@@ -46,6 +46,12 @@ public class UcitajSkladisteAction implements EventHandler<ActionEvent> {
 		}else {
 			System.out.println("Nesto ne valja");
 		}
+		view.getUcitajAtribute().setDisable(false);
+		view.getDodajEntitet().setDisable(false);
+		view.getPretraziSkladiste().setDisable(false);
+		view.getSortirajSkladiste().setDisable(false);
+		view.getObrisiEntitet().setDisable(false);
+		view.getFileConfig().setDisable(false);
 	}
 
 }

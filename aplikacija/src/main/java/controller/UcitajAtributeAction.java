@@ -9,7 +9,8 @@ public class UcitajAtributeAction implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		AttributeDialog.getInstance().show();
+		AttributeDialog dialog=AttributeDialog.getInstance();
+		dialog.show();
 	}
 
 }

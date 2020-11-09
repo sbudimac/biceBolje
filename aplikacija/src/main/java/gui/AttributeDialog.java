@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import controller.DodajKoloneAction;
 import controller.FiltrirajAtributeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -60,14 +61,15 @@ public class AttributeDialog extends Stage {
 		customAtribut=new CheckBox();
 		customAtribut.setVisible(false);
 		customAtribut.setManaged(false);
+		atributi.add(customAtribut);
 		boxovi=new VBox();
 		boxovi.getChildren().addAll(atributi);
-		boxovi.getChildren().add(customAtribut);
 		boxovi.setAlignment(Pos.CENTER);
 		pozadina.setCenter(boxovi);
 		
 		buttons=new HBox();
 		ok=new Button("Ok");
+		ok.setOnAction(new DodajKoloneAction());
 		close=new Button("Close");
 		close.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
