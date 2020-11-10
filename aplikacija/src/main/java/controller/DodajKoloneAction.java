@@ -59,6 +59,9 @@ public class DodajKoloneAction implements EventHandler<ActionEvent> {
 				tabela.getColumns().add(column);
 			}
 		}
+		for (CheckBox atribut : atributi) {
+			atribut.setSelected(false);
+		}
 	}
 
 }

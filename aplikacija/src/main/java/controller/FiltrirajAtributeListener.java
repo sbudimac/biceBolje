@@ -28,8 +28,7 @@ public class FiltrirajAtributeListener implements ChangeListener<String> {
 			AttributeDialog.getCustomAtribut().setText(newValue);
 			AttributeDialog.getCustomAtribut().setVisible(true);
 			AttributeDialog.getCustomAtribut().setManaged(true);
-		}
-		if(newValue=="") {
+		}else if(newValue=="") {
 			AttributeDialog.getCustomAtribut().setVisible(false);
 			AttributeDialog.getCustomAtribut().setManaged(false);
 		}
