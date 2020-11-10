@@ -1,16 +1,5 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import api.AbstractOperator;
-import api.Entitet;
-import api.FileOperator;
-import api.Operacija;
-import api.Uslov;
-import api.UslovFactory;
-import crudJson.JsonOperator;
-import crudYaml.YamlOperator;
 import gui.MainView;
 import javafx.application.Application;
 import javafx.stage.Stage;

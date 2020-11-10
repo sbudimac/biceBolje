@@ -22,7 +22,6 @@ public class YamlOperator extends FileOperator {
 	
 	public YamlOperator(String putanja) {
 		super(putanja);
-		ucitajSkladiste();
 	}
 
 	@Override

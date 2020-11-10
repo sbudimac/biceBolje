@@ -13,7 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceDialog;
 import javafx.stage.DirectoryChooser;
 
-public class UcitajSkladisteAction implements EventHandler<ActionEvent> {
+public class UcitajUSkladisteAction implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent event) {
@@ -34,23 +34,13 @@ public class UcitajSkladisteAction implements EventHandler<ActionEvent> {
 			File selectedFile=dirChooser.showDialog(view);
 			if(selectedFile!=null) {
 				if(result.get().equals("Json")) {
-					view.setOperator(new JsonOperator(selectedFile.getAbsolutePath()));
+					view.getSkladiste().setOperator(new JsonOperator(selectedFile.getAbsolutePath()));
 				}else if(result.get().equals("Yaml")) {
-					view.setOperator(new YamlOperator(selectedFile.getAbsolutePath()));
+					view.getSkladiste().setOperator(new YamlOperator(selectedFile.getAbsolutePath()));
 				}
+				view.popuniTabelu(view.getSkladiste().getEntiteti());
 			}
 		}
-		if(view.getOperator()!=null) {
-			view.getOperator().ucitajSkladiste();
-			view.popuniTabelu(view.getOperator().getEntiteti());
-		}else {
-			System.out.println("Nesto ne valja");
-		}
-		view.getUcitajAtribute().setDisable(false);
-		view.getDodajEntitet().setDisable(false);
-		view.getPretraziSkladiste().setDisable(false);
-		view.getSortirajSkladiste().setDisable(false);
-		view.getObrisiEntitet().setDisable(false);
 		view.getFileConfig().setDisable(false);
 	}
 

@@ -1,16 +1,13 @@
 package gui;
 
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import api.Entitet;
-import api.FileOperator;
+import api.Skladiste;
 import controller.DodajEntitetAction;
 import controller.FileConfigAction;
 import controller.UcitajAtributeAction;
-import controller.UcitajSkladisteAction;
+import controller.UcitajUSkladisteAction;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
@@ -26,17 +23,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MainView extends Stage {
 	private static MainView instance=null;
-	private FileOperator operator=null;
-	
-	public FileOperator getOperator() {
-		return operator;
+	private Skladiste skladiste = new Skladiste();
+
+	public Skladiste getSkladiste() {
+		return skladiste;
 	}
 
-	public void setOperator(FileOperator operator) {
-		this.operator = operator;
+	public void setSkladiste(Skladiste skladiste) {
+		this.skladiste = skladiste;
 	}
 
-	private Button ucitajSkladiste;
+	private Button ucitajUSkladiste;
 	private Button ucitajAtribute;
 	private Button dodajEntitet;
 	private Button pretraziSkladiste;
@@ -47,13 +44,12 @@ public class MainView extends Stage {
 	private HBox meni;
 	private TableView<Entitet> tabela;
 	
-	@SuppressWarnings("unchecked")
 	private MainView() {
 		BorderPane pozadina=new BorderPane();
 		
 		toolbar=new ToolBar();
 		
-		ucitajSkladiste=new Button();
+		ucitajUSkladiste=new Button();
 		ucitajAtribute=new Button();
 		dodajEntitet=new Button();
 		pretraziSkladiste=new Button();
@@ -65,61 +61,46 @@ public class MainView extends Stage {
 		ImageView imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
-		ucitajSkladiste.setGraphic(imgView);
-		ucitajSkladiste.setOnAction(new UcitajSkladisteAction());
+		ucitajUSkladiste.setGraphic(imgView);
+		ucitajUSkladiste.setOnAction(new UcitajUSkladisteAction());
 		img = new Image("ikonice/attribute.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
 		ucitajAtribute.setGraphic(imgView);
 		ucitajAtribute.setOnAction(new UcitajAtributeAction());
-		if(operator==null) {
-			ucitajAtribute.setDisable(true);
-		}
 		img = new Image("ikonice/add.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
 		dodajEntitet.setGraphic(imgView);
 		dodajEntitet.setOnAction(new DodajEntitetAction());
-		if(operator==null) {
-			dodajEntitet.setDisable(true);
-		}
 		img = new Image("ikonice/search.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
 		pretraziSkladiste.setGraphic(imgView);
-		if(operator==null) {
-			pretraziSkladiste.setDisable(true);
-		}
 		img = new Image("ikonice/sort.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
 		sortirajSkladiste.setGraphic(imgView);
-		if(operator==null) {
-			sortirajSkladiste.setDisable(true);
-		}
 		img = new Image("ikonice/delete.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
 		obrisiEntitet.setGraphic(imgView);
-		if(operator==null) {
-			obrisiEntitet.setDisable(true);
-		}
 		img = new Image("ikonice/settings.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
-		if(operator==null) {
+		if(skladiste.getOperator()==null) {
 			fileConfig.setDisable(true);
 		}
 		fileConfig.setGraphic(imgView);
 		fileConfig.setOnAction(new FileConfigAction());
 		
-		toolbar.getItems().add(ucitajSkladiste);
+		toolbar.getItems().add(ucitajUSkladiste);
 		toolbar.getItems().add(new Separator());
 		toolbar.getItems().add(ucitajAtribute);
 		toolbar.getItems().add(new Separator());
@@ -141,7 +122,8 @@ public class MainView extends Stage {
 		TableColumn<Entitet, String> colId=new TableColumn<>("Id");
 		TableColumn<Entitet, String> colNaziv=new TableColumn<>("Naziv");
 		
-		tabela.getColumns().addAll(colId, colNaziv);
+		tabela.getColumns().add(colId);
+		tabela.getColumns().add(colNaziv);
 		
 		colId.setCellValueFactory(new PropertyValueFactory<Entitet, String>("id"));
 		colNaziv.setCellValueFactory(new PropertyValueFactory<Entitet, String>("naziv"));

@@ -54,7 +54,7 @@ public class AttributeDialog extends Stage {
 		pozadina.setTop(pretraga);
 		
 		atributi=new ArrayList<CheckBox>();
-		Set<String> kljucevi=MainView.getInstance().getOperator().getKljucevi();
+		Set<String> kljucevi=MainView.getInstance().getSkladiste().getKljucevi();
 		for (String kljuc : kljucevi) {
 			atributi.add(new CheckBox(kljuc));
 		}

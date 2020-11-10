@@ -22,15 +22,15 @@ public abstract class FileOperator extends AbstractOperator {
 	}
 	
 	@Override
-	public void ucitajSkladiste() {
-		skladiste=new Skladiste();
+	public List<Entitet> ucitajUSkladiste() {
+		List<Entitet> ucitaniEntiteti = new ArrayList<Entitet>();
 		File direktorijum=putanja.toFile();
 		File[] fajloviDirektorijuma=direktorijum.listFiles();
 		if(fajloviDirektorijuma!=null) {
 			for (File fajl : fajloviDirektorijuma) {
 				List<Entitet> entitetiFajla = prevediFajl(fajl);
 				if(entitetiFajla == null || entitetiFajla.size() <= 0) continue;
-				skladiste.nalepiEntitete(entitetiFajla);
+				ucitaniEntiteti.addAll(entitetiFajla);
 				Path ucitanFajl = direktorijum.toPath().relativize(fajl.toPath());
 				fajloviEntiteta.put(ucitanFajl, entitetiFajla);
 				
@@ -38,6 +38,7 @@ public abstract class FileOperator extends AbstractOperator {
 				if(fileIndex >= currFileIndex) currFileIndex = fileIndex + 1;
 			}
 		}
+		return ucitaniEntiteti;
 	}
 	
 	protected abstract List<Entitet> prevediFajl(File fajl);
@@ -70,8 +71,6 @@ public abstract class FileOperator extends AbstractOperator {
 	
 	@Override
 	public void dodajEntitet(Entitet entitet) {
-		int rezultat = skladiste.dodajEntitet(entitet);
-		if(rezultat != 0) return;
 		Path putanjaFajla;
 		for(Map.Entry<Path, List<Entitet>> grupaEntiteta : fajloviEntiteta.entrySet()) {
 			if(grupaEntiteta.getValue().size()<maxBrojEntiteta) {
@@ -94,23 +93,14 @@ public abstract class FileOperator extends AbstractOperator {
 	}
 	
 	@Override
-	public void naknadnoDodaj(String idSpoljasnjeg, String kljucSpoljasnjeg, Entitet ugnjezden) {
-		int rezultat = skladiste.naknadnoDodaj(idSpoljasnjeg, kljucSpoljasnjeg, ugnjezden);
-		if(rezultat != 0) return;
-		Path putanjaFajla = fajlEntiteta(idSpoljasnjeg);
+	public void izmeniEntitet(Entitet entitet) {
+		Path putanjaFajla = fajlEntiteta(entitet);
 		ispisiFajl(putanjaFajla);
 	}
-	
-	@Override
-	public void izmeniEntitet(Entitet entitet, String kljuc, String vrednost) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
-	public void brisi(List<Uslov> uslovi) {
-		List<Entitet> rezultat=skladiste.brisi(uslovi);
-		for(Entitet entitet : rezultat) {
+	public void brisi(List<Entitet> entiteti) {
+		for(Entitet entitet : entiteti) {
 			Path putanjaFajla=fajlEntiteta(entitet);
 			fajloviEntiteta.get(putanjaFajla).remove(entitet);
 			if(fajloviEntiteta.get(putanjaFajla).size()<=0) {

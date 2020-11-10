@@ -23,7 +23,6 @@ public class JsonOperator extends FileOperator {
 	
 	public JsonOperator(String putanja) {
 		super(putanja);
-		ucitajSkladiste();
 	}
 
 	@Override

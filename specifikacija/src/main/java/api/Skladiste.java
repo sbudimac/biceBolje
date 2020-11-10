@@ -9,6 +9,7 @@ import java.util.Set;
 public class Skladiste {	
 	private List<Entitet> entiteti;
 	private Set<String> kljucevi;
+	private AbstractOperator operator;
 	
 	public Skladiste() {
 		entiteti=new ArrayList<>();
@@ -23,12 +24,12 @@ public class Skladiste {
 		return kljucevi;
 	}
 	
-	public void nalepiEntitete(List<Entitet> entiteti) {
+	/*public void nalepiEntitete(List<Entitet> entiteti) {
 		this.entiteti.addAll(entiteti);
 		for (Entitet e : entiteti) {
 			kljucevi.addAll(e.getAtributi().keySet());
 		}
-	}
+	}*/
 	
 	public int dodajEntitet(Entitet entitet) {
 		for (Entitet e : entiteti) {
@@ -43,6 +44,7 @@ public class Skladiste {
 		}
 		entiteti.add(entitet);
 		kljucevi.addAll(entitet.getAtributi().keySet());
+		operator.dodajEntitet(entitet);
 		return 0;
 	}
 	
@@ -50,6 +52,7 @@ public class Skladiste {
 		for (Entitet entitet : entiteti) {
 			if(entitet.getId().equals(idSpoljasnjeg)){
 				entitet.dodajAtribut(kljucSpoljasnjeg, ugnjezden);
+				operator.izmeniEntitet(entitet);
 				return 0;
 			}
 		}
@@ -81,6 +84,26 @@ public class Skladiste {
 	public List<Entitet> brisi(List<Uslov> uslovi) {
 		List<Entitet> rezultat=pretrazi(uslovi);
 		entiteti.removeAll(rezultat);
+		operator.brisi(rezultat);
 		return rezultat;
+	}
+
+	public AbstractOperator getOperator() {
+		return operator;
+	}
+
+	public void setOperator(AbstractOperator operator) {
+		this.operator = operator;
+		List<Entitet> ucitaniEntiteti = operator.ucitajUSkladiste();
+		List<Entitet> entitetiZaBrisanje = new ArrayList<Entitet>();
+		for(Entitet entitet : entiteti) {
+			if(ucitaniEntiteti.contains(entitet)) {
+				entitetiZaBrisanje.add(entitet);
+			} else {
+				operator.dodajEntitet(entitet);
+			}
+		}
+		entiteti.removeAll(entitetiZaBrisanje);
+		entiteti.addAll(ucitaniEntiteti);
 	}
 }
