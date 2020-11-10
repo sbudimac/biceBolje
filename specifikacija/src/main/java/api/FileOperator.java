@@ -22,7 +22,7 @@ public abstract class FileOperator extends AbstractOperator {
 	}
 	
 	@Override
-	public List<Entitet> ucitajUSkladiste() {
+	List<Entitet> ucitajUSkladiste() {
 		List<Entitet> ucitaniEntiteti = new ArrayList<Entitet>();
 		File direktorijum=putanja.toFile();
 		File[] fajloviDirektorijuma=direktorijum.listFiles();
@@ -70,7 +70,7 @@ public abstract class FileOperator extends AbstractOperator {
 	}
 	
 	@Override
-	public void dodajEntitet(Entitet entitet) {
+	void dodajEntitet(Entitet entitet) {
 		Path putanjaFajla;
 		for(Map.Entry<Path, List<Entitet>> grupaEntiteta : fajloviEntiteta.entrySet()) {
 			if(grupaEntiteta.getValue().size()<maxBrojEntiteta) {
@@ -93,13 +93,13 @@ public abstract class FileOperator extends AbstractOperator {
 	}
 	
 	@Override
-	public void izmeniEntitet(Entitet entitet) {
+	void izmeniEntitet(Entitet entitet) {
 		Path putanjaFajla = fajlEntiteta(entitet);
 		ispisiFajl(putanjaFajla);
 	}
 
 	@Override
-	public void brisi(List<Entitet> entiteti) {
+	void brisi(List<Entitet> entiteti) {
 		for(Entitet entitet : entiteti) {
 			Path putanjaFajla=fajlEntiteta(entitet);
 			fajloviEntiteta.get(putanjaFajla).remove(entitet);

@@ -26,7 +26,7 @@ public class Entitet {
 		return id;
 	}
 	
-	public Map<String, Object> getAtributi(){
+	Map<String, Object> getAtributi(){
 		return atributi;
 	}
 	

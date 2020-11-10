@@ -8,11 +8,11 @@ public abstract class AbstractOperator {
 	}
 	//CRUD
 	//READ
-	public abstract List<Entitet> ucitajUSkladiste();
+	abstract List<Entitet> ucitajUSkladiste();
 	//CREATE
-	public abstract void dodajEntitet(Entitet entitet);
+	abstract void dodajEntitet(Entitet entitet);
 	//UPDATE
-	public abstract void izmeniEntitet(Entitet entitet);
+	abstract void izmeniEntitet(Entitet entitet);
 	//DELETE
-	public abstract void brisi(List<Entitet> entiteti) ;
+	abstract void brisi(List<Entitet> entiteti) ;
 }
