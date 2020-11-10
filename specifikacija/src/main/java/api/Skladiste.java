@@ -105,5 +105,13 @@ public class Skladiste {
 		}
 		entiteti.removeAll(entitetiZaBrisanje);
 		entiteti.addAll(ucitaniEntiteti);
+		for (Entitet e : ucitaniEntiteti) {
+			kljucevi.addAll(e.getAtributi().keySet());
+		}
+	}
+
+	public void izmeniEntitet(Entitet entitet, String kljuc, String vrednost) {
+		entitet.setAtribut(kljuc, vrednost);
+		operator.izmeniEntitet(entitet);
 	}
 }

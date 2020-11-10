@@ -13,7 +13,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
 public class DodajKoloneAction implements EventHandler<ActionEvent> {
@@ -34,6 +36,14 @@ public class DodajKoloneAction implements EventHandler<ActionEvent> {
 		for (CheckBox atribut : atributi) {
 			if(atribut.isSelected()) {
 				TableColumn<Entitet, String> column=new TableColumn<>(atribut.getText());
+				column.setCellFactory(TextFieldTableCell.forTableColumn());
+				column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Entitet,String>>() {
+					
+					@Override
+					public void handle(CellEditEvent<Entitet, String> event) {
+						MainView.getInstance().getSkladiste().izmeniEntitet(event.getRowValue(), atribut.getText(), event.getNewValue());
+					}
+				});
 				column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Entitet,String>, ObservableValue<String>>() {
 					
 					@Override

@@ -119,6 +119,7 @@ public class MainView extends Stage {
 		pozadina.setTop(meni);
 				
 		tabela=new TableView<Entitet>();
+		tabela.setEditable(true);
 		TableColumn<Entitet, String> colId=new TableColumn<>("Id");
 		TableColumn<Entitet, String> colNaziv=new TableColumn<>("Naziv");
 		

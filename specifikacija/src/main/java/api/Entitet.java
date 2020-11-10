@@ -34,6 +34,13 @@ public class Entitet {
 		return atributi.get(kljuc);
 	}
 	
+	public void setAtribut(String kljuc, String vrednost) {
+		atributi.remove(kljuc);
+		Object preradjenaVrednost = ParserPodataka.parse(vrednost);
+		if(preradjenaVrednost == null) return;
+		atributi.put(kljuc, preradjenaVrednost);
+	}
+	
 	public List<Entitet> nadjiUgnjezdene(){
 		List<Entitet> ugnjezdeni=new ArrayList<>();
 		for (Object atribut : atributi.values()) {
