@@ -44,7 +44,9 @@ public class Skladiste {
 		}
 		entiteti.add(entitet);
 		kljucevi.addAll(entitet.getAtributi().keySet());
-		operator.dodajEntitet(entitet);
+		if(operator!=null) {
+			operator.dodajEntitet(entitet);
+		}
 		return 0;
 	}
 	
@@ -52,7 +54,9 @@ public class Skladiste {
 		for (Entitet entitet : entiteti) {
 			if(entitet.getId().equals(idSpoljasnjeg)){
 				entitet.dodajAtribut(kljucSpoljasnjeg, ugnjezden);
-				operator.izmeniEntitet(entitet);
+				if(operator!=null) {
+					operator.izmeniEntitet(entitet);
+				}
 				return 0;
 			}
 		}
@@ -81,11 +85,11 @@ public class Skladiste {
 		return entiteti;
 	}
 	
-	public List<Entitet> brisi(List<Uslov> uslovi) {
-		List<Entitet> rezultat=pretrazi(uslovi);
-		entiteti.removeAll(rezultat);
-		operator.brisi(rezultat);
-		return rezultat;
+	public void brisi(Entitet entitet) {
+		entiteti.remove(entitet);
+		if(operator!=null) {
+			operator.brisi(entitet);
+		}
 	}
 
 	public AbstractOperator getOperator() {
@@ -112,6 +116,8 @@ public class Skladiste {
 
 	public void izmeniEntitet(Entitet entitet, String kljuc, String vrednost) {
 		entitet.setAtribut(kljuc, vrednost);
-		operator.izmeniEntitet(entitet);
+		if(operator!=null) {
+			operator.izmeniEntitet(entitet);
+		}
 	}
 }

@@ -7,10 +7,12 @@ import api.Skladiste;
 import controller.DodajEntitetAction;
 import controller.FileConfigAction;
 import controller.FiltriranjeEntitetaAction;
+import controller.ObrisiEntitetAction;
 import controller.UcitajAtributeAction;
 import controller.UcitajUSkladisteAction;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
@@ -85,6 +87,7 @@ public class MainView extends Stage {
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
 		obrisiEntitet.setGraphic(imgView);
+		obrisiEntitet.setOnAction(new ObrisiEntitetAction());
 		img = new Image("ikonice/settings.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
@@ -110,12 +113,13 @@ public class MainView extends Stage {
 				
 		tabela=new TableView<Entitet>();
 		tabela.setEditable(true);
+		tabela.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		TableColumn<Entitet, String> colId=new TableColumn<>("Id");
 		TableColumn<Entitet, String> colNaziv=new TableColumn<>("Naziv");
 		
 		tabela.getColumns().add(colId);
 		tabela.getColumns().add(colNaziv);
-		
+				
 		colId.setCellValueFactory(new PropertyValueFactory<Entitet, String>("id"));
 		colNaziv.setCellValueFactory(new PropertyValueFactory<Entitet, String>("naziv"));
 		

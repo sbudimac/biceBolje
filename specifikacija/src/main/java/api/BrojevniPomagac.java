@@ -27,9 +27,9 @@ public class BrojevniPomagac {
 		if(Math.abs(n1.doubleValue() - n2.doubleValue()) < epsilon) {
 			return 0;
 		} else if(n1.doubleValue() - n2.doubleValue() > epsilon) {
-			return 1;
-		} else if(n1.doubleValue() - n2.doubleValue() < -epsilon) {
 			return -1;
+		} else if(n1.doubleValue() - n2.doubleValue() < -epsilon) {
+			return 1;
 		}
 		return 0;
 	}

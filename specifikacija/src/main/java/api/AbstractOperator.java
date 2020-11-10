@@ -14,5 +14,5 @@ public abstract class AbstractOperator {
 	//UPDATE
 	abstract void izmeniEntitet(Entitet entitet);
 	//DELETE
-	abstract void brisi(List<Entitet> entiteti) ;
+	abstract void brisi(Entitet entitet) ;
 }

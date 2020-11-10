@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Optional;
 
+import gui.DodavanjeEntitetaDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -26,9 +27,11 @@ public class DodajEntitetAction implements EventHandler<ActionEvent> {
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == automatski){
-		    // ... automatski
+			DodavanjeEntitetaDialog dialog=new DodavanjeEntitetaDialog();
+			dialog.showAndWait();
 		} else if (result.get() == rucno) {
-		    // ... rucno
+			DodavanjeEntitetaDialog dialog=new DodavanjeEntitetaDialog();
+			dialog.showAndWait();
 		} else {
 		    // ... cancel
 		}

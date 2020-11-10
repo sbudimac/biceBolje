@@ -99,16 +99,14 @@ public abstract class FileOperator extends AbstractOperator {
 	}
 
 	@Override
-	void brisi(List<Entitet> entiteti) {
-		for(Entitet entitet : entiteti) {
-			Path putanjaFajla=fajlEntiteta(entitet);
-			fajloviEntiteta.get(putanjaFajla).remove(entitet);
-			if(fajloviEntiteta.get(putanjaFajla).size()<=0) {
-				fajloviEntiteta.remove(putanjaFajla);
-				putanja.resolve(putanjaFajla).toFile().delete();
-			}else {
-				ispisiFajl(putanjaFajla);
-			}
+	void brisi(Entitet entitet) {
+		Path putanjaFajla=fajlEntiteta(entitet);
+		fajloviEntiteta.get(putanjaFajla).remove(entitet);
+		if(fajloviEntiteta.get(putanjaFajla).size()<=0) {
+			fajloviEntiteta.remove(putanjaFajla);
+			putanja.resolve(putanjaFajla).toFile().delete();
+		}else {
+			ispisiFajl(putanjaFajla);
 		}
 	}
 	

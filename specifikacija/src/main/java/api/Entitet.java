@@ -9,9 +9,7 @@ public class Entitet {
 	private String naziv;
 	private String id;
 	private Map<String, Object> atributi;
-	
-	public Entitet() {};
-	
+		
 	public Entitet(String naziv, String id) {
 		this.naziv=naziv;
 		this.id=id;

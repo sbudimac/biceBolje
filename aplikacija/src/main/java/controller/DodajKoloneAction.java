@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import api.AttributeComparator;
 import api.Entitet;
 import gui.AttributeDialog;
 import gui.MainView;
@@ -61,6 +62,8 @@ public class DodajKoloneAction implements EventHandler<ActionEvent> {
 						return new SimpleStringProperty(vrednost);
 					}
 				});
+				column.setSortable(true);
+				column.setComparator(new AttributeComparator());
 				tabela.getColumns().add(column);
 			}
 		}
