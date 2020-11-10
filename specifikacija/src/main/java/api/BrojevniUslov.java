@@ -1,6 +1,6 @@
 package api;
 
-public class BrojevniUslov extends Uslov {
+public class BrojevniUslov extends VrednosniUslov {
 	private Number prag;
 	
 	BrojevniUslov(String kljuc, Operacija operacija, Number prag) {

@@ -1,6 +1,6 @@
 package api;
 
-public class TekstualniUslov extends Uslov {
+public class TekstualniUslov extends VrednosniUslov {
 	private String term;
 	
 	TekstualniUslov(String kljuc, Operacija operacija, String term) {

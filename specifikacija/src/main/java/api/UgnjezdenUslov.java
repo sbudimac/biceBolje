@@ -9,13 +9,6 @@ public class UgnjezdenUslov extends Uslov {
 	}
 
 	@Override
-	public void setOperacija(Operacija operacija) {
-		if(operacija.getTip().isTipPodrzan(Tip.ENTITET)) {
-			this.operacija = operacija;
-		}
-	}
-
-	@Override
 	public Object getVrednost() {
 		return kljuc;
 	}

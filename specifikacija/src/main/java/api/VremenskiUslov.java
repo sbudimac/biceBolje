@@ -2,7 +2,7 @@ package api;
 
 import java.time.LocalDateTime;
 
-public class VremenskiUslov extends Uslov {
+public class VremenskiUslov extends VrednosniUslov {
 	private LocalDateTime prag;
 	
 	VremenskiUslov(String kljuc, Operacija operacija, LocalDateTime prag) {
