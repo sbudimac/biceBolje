@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class UslovFactory {
 	
-	public static Uslov KreirajUslov(String kljuc, Operacija operacija, String vrednost) {
+	public static Uslov kreirajUslov(String kljuc, Operacija operacija, String vrednost) {
 		Uslov uslov = null;
 		if(kljuc.equals("id") || kljuc.equals("naziv")) {
 			uslov = new TekstualniUslov(kljuc, operacija, vrednost);

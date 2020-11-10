@@ -1,14 +1,14 @@
 package gui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import api.Operacija;
 import api.Uslov;
+import controller.DodajUslovAction;
+import controller.PotvrdiUsloveAction;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -25,27 +25,31 @@ public class FilterDialog extends Dialog<List<Uslov>> {
 	private Set<String> listaKljuceva;
 	
 	private VBox sviUslovi;
-	private List<HBox> redovi;
+	private Set<FilterGUI> redovi;
 	
 	private List<ComboBox<String>> kljucevi;
-	private List<ComboBox<String>> operacije;
+	private List<ComboBox<Operacija>> operacije;
 	private List<TextField> uslovi;
+	
 	private List<CheckBox> ugnjezdeni;
+	private List<ComboBox<String>> spoljasnjiKljucevi;
 	
 	private HBox buttons;
 	
 	private Button ok;
+	private Button dodaj;
 	private Button cancel;
 	
 	public FilterDialog() {
 		super();
 		BorderPane pozadina=new BorderPane();
 		
-		redovi=new ArrayList<>();
+		redovi=new HashSet<>();
 		kljucevi=new ArrayList<>();
 		operacije=new ArrayList<>();
 		uslovi=new ArrayList<>();
 		ugnjezdeni=new ArrayList<>();
+		spoljasnjiKljucevi=new ArrayList<>();
 		sviUslovi=new VBox();
 		sviUslovi.getChildren().addAll(redovi);
 		
@@ -53,6 +57,9 @@ public class FilterDialog extends Dialog<List<Uslov>> {
 		
 		buttons=new HBox();
 		ok=new Button("Potvrdi");
+		ok.setOnAction(new PotvrdiUsloveAction(this));
+		dodaj=new Button("Dodaj");
+		dodaj.setOnAction(new DodajUslovAction(this));
 		cancel=new Button("Cancel");
 		cancel.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
@@ -61,13 +68,14 @@ public class FilterDialog extends Dialog<List<Uslov>> {
 			}
 		});
 		buttons.getChildren().add(ok);
+		buttons.getChildren().add(dodaj);
 		buttons.getChildren().add(cancel);
 		
 		pozadina.setCenter(sviUslovi);
 		pozadina.setBottom(buttons);
 		
 		getDialogPane().setContent(pozadina);
-		getDialogPane().setPrefWidth(400);
+		getDialogPane().setPrefWidth(800);
 		getDialogPane().setPrefHeight(600);
 		setTitle("Odabir uslova pretrage");
 	}
@@ -79,9 +87,8 @@ public class FilterDialog extends Dialog<List<Uslov>> {
 		cbKljuc.getItems().addAll(listaKljuceva);
 		kljucevi.add(cbKljuc);
 		
-		ComboBox<String> cbUslov=new ComboBox<String>();
-		List<String> enums=Stream.of(Operacija.values()).map(Operacija::name).collect(Collectors.toList());
-		cbUslov.getItems().addAll(enums);
+		ComboBox<Operacija> cbUslov=new ComboBox<Operacija>();
+		cbUslov.getItems().setAll(Operacija.values());
 		operacije.add(cbUslov);
 		
 		TextField tf=new TextField();
@@ -90,9 +97,18 @@ public class FilterDialog extends Dialog<List<Uslov>> {
 		CheckBox cb=new CheckBox();
 		ugnjezdeni.add(cb);
 		
-		HBox uslov=new HBox(cbKljuc, cbUslov, tf, cb);
+		ComboBox<String> cbSpoljasnji=new ComboBox<String>();
+		cbSpoljasnji.getItems().setAll(listaKljuceva);
+		cbSpoljasnji.setVisible(false);
+		cbSpoljasnji.setManaged(false);
+		spoljasnjiKljucevi.add(cbSpoljasnji);
+		
+		FilterGUI uslov=new FilterGUI(cbKljuc, cbUslov, tf, cb, cbSpoljasnji);
 		redovi.add(uslov);
-		sviUslovi.getChildren().removeAll();
-		sviUslovi.getChildren().addAll(redovi);
+		sviUslovi.getChildren().addAll(uslov);
+	}
+	
+	public Set<FilterGUI> getRedovi(){
+		return redovi;
 	}
 }

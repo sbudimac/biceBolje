@@ -13,13 +13,13 @@ public class ParserPodataka {
 			try {
 				preradjenaVrednost = LocalDateTime.parse(vrednost);
 			} catch (DateTimeParseException e) {
-				e.printStackTrace();
+				
 			}
 			if(preradjenaVrednost == null) {
 				try {
 					preradjenaVrednost = nf.parse(vrednost);
 				} catch (ParseException e) {
-					e.printStackTrace();
+					
 				}
 			}
 			if(preradjenaVrednost == null) {

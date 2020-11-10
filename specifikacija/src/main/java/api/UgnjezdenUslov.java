@@ -1,8 +1,12 @@
 package api;
 
 public class UgnjezdenUslov extends Uslov {
-	private String kljucPodEntiteta;
 	private Uslov podUslov;
+	
+	public UgnjezdenUslov(String kljuc, Uslov podUslov) {
+		this.kljuc=kljuc;
+		this.podUslov=podUslov;
+	}
 
 	@Override
 	public void setOperacija(Operacija operacija) {
@@ -13,19 +17,19 @@ public class UgnjezdenUslov extends Uslov {
 
 	@Override
 	public Object getVrednost() {
-		return kljucPodEntiteta;
+		return kljuc;
 	}
 
 	@Override
 	public void setVrednost(Object vrednost) {
 		if(vrednost instanceof String) {
-			kljucPodEntiteta = (String) vrednost;
+			kljuc = (String) vrednost;
 		}
 	}
 
 	@Override
 	public boolean test(Entitet entitet) {
-		Object vrednost = entitet.getAtribut(this.kljucPodEntiteta);
+		Object vrednost = entitet.getAtribut(kljuc);
 		if(vrednost != null && vrednost instanceof Entitet) {
 			Entitet podEntitet = (Entitet) vrednost;
 			return podUslov.test(podEntitet);
