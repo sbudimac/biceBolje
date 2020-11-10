@@ -1,6 +1,8 @@
 package api;
 
-public abstract class Uslov {
+import java.util.function.Predicate;
+
+public abstract class Uslov implements Predicate<Entitet> {
 	protected String kljuc;
 	protected Operacija operacija;
 	
@@ -17,6 +19,4 @@ public abstract class Uslov {
 	public abstract Object getVrednost();
 	
 	public abstract void setVrednost(Object vrednost);
-	
-	public abstract boolean poredi(Entitet entitet);
 }

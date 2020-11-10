@@ -6,6 +6,7 @@ import api.Entitet;
 import api.Skladiste;
 import controller.DodajEntitetAction;
 import controller.FileConfigAction;
+import controller.FiltriranjeEntitetaAction;
 import controller.UcitajAtributeAction;
 import controller.UcitajUSkladisteAction;
 import javafx.scene.Scene;
@@ -78,6 +79,7 @@ public class MainView extends Stage {
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
 		pretraziSkladiste.setGraphic(imgView);
+		pretraziSkladiste.setOnAction(new FiltriranjeEntitetaAction());
 		img = new Image("ikonice/delete.png");
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
@@ -87,9 +89,6 @@ public class MainView extends Stage {
 		imgView=new ImageView(img);
 		imgView.setFitHeight(30);
 		imgView.setFitWidth(30);
-		if(skladiste.getOperator()==null) {
-			fileConfig.setDisable(true);
-		}
 		fileConfig.setGraphic(imgView);
 		fileConfig.setOnAction(new FileConfigAction());
 		

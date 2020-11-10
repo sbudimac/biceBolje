@@ -64,7 +64,7 @@ public class Skladiste {
 		for (Entitet entitet : entiteti) {
 			boolean ispunjava=true;
 			for (Uslov uslov : uslovi) {
-				if(!(uslov.poredi(entitet))) {
+				if(!(uslov.test(entitet))) {
 					ispunjava=false;
 					break;
 				}

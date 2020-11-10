@@ -29,7 +29,7 @@ public class BrojevniUslov extends Uslov {
 	}
 
 	@Override
-	public boolean poredi(Entitet entitet) {
+	public boolean test(Entitet entitet) {
 		Object vrednost = entitet.getAtribut(this.kljuc);
 		if(vrednost != null && vrednost instanceof Number) {
 			Number numerickaVrednost = (Number) vrednost;
@@ -72,39 +72,3 @@ public class BrojevniUslov extends Uslov {
 	}
 
 }
-	
-	/*case JEDNAKO:
-	if(prag.doubleValue() - numerickaVrednost.doubleValue() < Math.abs(epsilon)) {
-		return true;
-	}
-	break;
-case MANJE:
-	if(prag.doubleValue() - numerickaVrednost.doubleValue() > epsilon) {
-		return true;
-	}
-	break;
-case MANJE_JEDNAKO:
-	if(prag.doubleValue() - numerickaVrednost.doubleValue() > epsilon
-			|| prag.doubleValue() - numerickaVrednost.doubleValue() < Math.abs(epsilon)) {
-		return true;
-	}
-	break;
-case NIJE_JEDNAKO:
-	if(prag.doubleValue() - numerickaVrednost.doubleValue() > Math.abs(epsilon)) {
-		return true;
-	}
-	break;
-case VECE:
-	if(prag.doubleValue() - numerickaVrednost.doubleValue() < -epsilon) {
-		return true;
-	}
-	break;
-case VECE_JEDNAKO:
-	if(prag.doubleValue() - numerickaVrednost.doubleValue() < -epsilon
-			|| prag.doubleValue() - numerickaVrednost.doubleValue() < Math.abs(epsilon)) {
-		return true;
-	}
-	break;
-default:
-	break;
-}*/

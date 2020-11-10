@@ -29,7 +29,7 @@ public class TekstualniUslov extends Uslov {
 	}
 
 	@Override
-	public boolean poredi(Entitet entitet) {
+	public boolean test(Entitet entitet) {
 		Object vrednost = entitet.getAtribut(this.kljuc);
 		if(vrednost != null && vrednost instanceof String) {
 			String tekst = (String) vrednost;

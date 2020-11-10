@@ -9,10 +9,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 
 public class FiltrirajAtributeListener implements ChangeListener<String> {
+	private AttributeDialog dialog;
+	
+	public FiltrirajAtributeListener(AttributeDialog dialog) {
+		this.dialog=dialog;
+	}
 
 	@Override
 	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		List<CheckBox> atributi=AttributeDialog.getAtributi();
+		List<CheckBox> atributi=dialog.getAtributi();
 		List<String> kljucevi=new ArrayList<>();
 		for (CheckBox atribut : atributi) {
 			kljucevi.add(atribut.toString());
@@ -25,12 +30,12 @@ public class FiltrirajAtributeListener implements ChangeListener<String> {
 			}
 		}
 		if(newValue!="" && !(kljucevi.contains(newValue))) {
-			AttributeDialog.getCustomAtribut().setText(newValue);
-			AttributeDialog.getCustomAtribut().setVisible(true);
-			AttributeDialog.getCustomAtribut().setManaged(true);
+			dialog.getCustomAtribut().setText(newValue);
+			dialog.getCustomAtribut().setVisible(true);
+			dialog.getCustomAtribut().setManaged(true);
 		}else if(newValue=="") {
-			AttributeDialog.getCustomAtribut().setVisible(false);
-			AttributeDialog.getCustomAtribut().setManaged(false);
+			dialog.getCustomAtribut().setVisible(false);
+			dialog.getCustomAtribut().setManaged(false);
 		}
 	}
 

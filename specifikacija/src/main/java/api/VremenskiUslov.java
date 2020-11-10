@@ -31,7 +31,7 @@ public class VremenskiUslov extends Uslov {
 	}
 
 	@Override
-	public boolean poredi(Entitet entitet) {
+	public boolean test(Entitet entitet) {
 		Object vrednost = entitet.getAtribut(this.kljuc);
 		if(vrednost != null && vrednost instanceof LocalDateTime) {
 			LocalDateTime vreme = (LocalDateTime) vrednost;

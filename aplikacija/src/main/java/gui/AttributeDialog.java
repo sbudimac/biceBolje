@@ -9,45 +9,44 @@ import controller.FiltrirajAtributeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class AttributeDialog extends Stage {
-	private static AttributeDialog instance=null;
+public class AttributeDialog extends Dialog<Boolean> {	
+	private TextField pretrazivac;
+	private HBox pretraga;
+	private List<CheckBox> atributi;
+	private CheckBox customAtribut;
+	private VBox boxovi;
+	private HBox buttons;
+	private Button ok;
+	private Button close;
 	
-	private static TextField pretrazivac;
-	private static HBox pretraga;
-	private static List<CheckBox> atributi;
-	private static CheckBox customAtribut;
-	private static VBox boxovi;
-	private static HBox buttons;
-	private static Button ok;
-	private static Button close;
 	
-	public static CheckBox getCustomAtribut() {
+	public CheckBox getCustomAtribut() {
 		return customAtribut;
 	}
 
-	public static List<CheckBox> getAtributi() {
+	public List<CheckBox> getAtributi() {
 		return atributi;
 	}
 	
-	public static VBox getBoxovi() {
+	public VBox getBoxovi() {
 		return boxovi;
 	}
 	
-	private AttributeDialog() {
+	public AttributeDialog() {
+		super();
 		BorderPane pozadina=new BorderPane();
-		Scene scena;
 		
 		pretrazivac=new TextField();
-		pretrazivac.textProperty().addListener(new FiltrirajAtributeListener());
+		pretrazivac.textProperty().addListener(new FiltrirajAtributeListener(this));
 		pretraga=new HBox(20);
 		pretraga.getChildren().add(pretrazivac);
 		pretraga.setAlignment(Pos.CENTER);
@@ -69,8 +68,8 @@ public class AttributeDialog extends Stage {
 		
 		buttons=new HBox();
 		ok=new Button("Ok");
-		ok.setOnAction(new DodajKoloneAction());
-		close=new Button("Close");
+		ok.setOnAction(new DodajKoloneAction(this));
+		close=new Button("Cancel");
 		close.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				Stage stage=(Stage)close.getScene().getWindow();
@@ -81,18 +80,9 @@ public class AttributeDialog extends Stage {
 		buttons.setAlignment(Pos.CENTER);
 		pozadina.setBottom(buttons);
 		
-		scena=new Scene(pozadina);
-		setScene(scena);
-		setWidth(500);
-		setHeight(700);
+		getDialogPane().setContent(pozadina);
+		getDialogPane().setPrefWidth(200);
+		getDialogPane().setPrefHeight(600);
 		setTitle("Selekcija atributa entiteta");
-		show();
-	}
-
-	public static AttributeDialog getInstance() {
-		if(instance==null) {
-			instance=new AttributeDialog();
-		}
-		return instance;
 	}
 }

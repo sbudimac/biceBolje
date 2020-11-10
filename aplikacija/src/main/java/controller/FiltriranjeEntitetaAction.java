@@ -1,15 +1,14 @@
 package controller;
 
-
-import gui.AttributeDialog;
+import gui.FilterDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class UcitajAtributeAction implements EventHandler<ActionEvent> {
+public class FiltriranjeEntitetaAction implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		AttributeDialog dialog=new AttributeDialog();
+		FilterDialog dialog=new FilterDialog();
 		dialog.showAndWait();
 	}
 

@@ -24,11 +24,11 @@ public class UgnjezdenUslov extends Uslov {
 	}
 
 	@Override
-	public boolean poredi(Entitet entitet) {
+	public boolean test(Entitet entitet) {
 		Object vrednost = entitet.getAtribut(this.kljucPodEntiteta);
 		if(vrednost != null && vrednost instanceof Entitet) {
 			Entitet podEntitet = (Entitet) vrednost;
-			return podUslov.poredi(podEntitet);
+			return podUslov.test(podEntitet);
 		}
 		return false;
 	}

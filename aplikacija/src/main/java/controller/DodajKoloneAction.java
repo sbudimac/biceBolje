@@ -19,11 +19,16 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 
 public class DodajKoloneAction implements EventHandler<ActionEvent> {
+	private AttributeDialog dialog;
+	
+	public DodajKoloneAction(AttributeDialog dialog) {
+		this.dialog=dialog;
+	}
 
 	@Override
 	public void handle(ActionEvent event) {
 		TableView<Entitet> tabela=MainView.getInstance().getTabela();
-		List<CheckBox> atributi=AttributeDialog.getAtributi();
+		List<CheckBox> atributi=dialog.getAtributi();
 		tabela.getColumns().clear();
 		TableColumn<Entitet, String> colId=new TableColumn<>("Id");
 		TableColumn<Entitet, String> colNaziv=new TableColumn<>("Naziv");

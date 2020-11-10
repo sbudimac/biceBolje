@@ -2,6 +2,8 @@ package controller;
 
 import java.util.Optional;
 
+import api.FileOperator;
+import gui.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
@@ -17,9 +19,9 @@ public class FileConfigAction implements EventHandler<ActionEvent> {
 
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()){
-		    System.out.println("Your name: " + result.get());
+			FileOperator operator=(FileOperator) MainView.getInstance().getSkladiste().getOperator();
+			operator.setKonfiguracija(Integer.parseInt(result.get()));
 		}
-
 		result.ifPresent(name -> System.out.println("Your name: " + name));
 	}
 	
