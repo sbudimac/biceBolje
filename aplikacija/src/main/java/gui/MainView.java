@@ -60,74 +60,64 @@ public class MainView extends Stage {
 		sortirajSkladiste=new Button();
 		obrisiEntitet=new Button();
 		fileConfig=new Button();
-		try {
-			FileInputStream input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\download.png");
-			Image img=new Image(input);
-			ImageView imgView=new ImageView(img);
-			imgView.setFitHeight(30);
-			imgView.setFitWidth(30);
-			ucitajSkladiste.setGraphic(imgView);
-			ucitajSkladiste.setOnAction(new UcitajSkladisteAction());
-			input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\attribute.png");
-			img=new Image(input);
-			imgView=new ImageView(img);
-			imgView.setFitHeight(30);
-			imgView.setFitWidth(30);
-			ucitajAtribute.setGraphic(imgView);
-			ucitajAtribute.setOnAction(new UcitajAtributeAction());
-			if(operator==null) {
-				ucitajAtribute.setDisable(true);
-			}
-			input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\add.png");
-			img=new Image(input);
-			imgView=new ImageView(img);
-			imgView.setFitHeight(30);
-			imgView.setFitWidth(30);
-			dodajEntitet.setGraphic(imgView);
-			dodajEntitet.setOnAction(new DodajEntitetAction());
-			if(operator==null) {
-				dodajEntitet.setDisable(true);
-			}
-			input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\search.png");
-			img=new Image(input);
-			imgView=new ImageView(img);
-			imgView.setFitHeight(30);
-			imgView.setFitWidth(30);
-			pretraziSkladiste.setGraphic(imgView);
-			if(operator==null) {
-				pretraziSkladiste.setDisable(true);
-			}
-			input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\sort.png");
-			img=new Image(input);
-			imgView=new ImageView(img);
-			imgView.setFitHeight(30);
-			imgView.setFitWidth(30);
-			sortirajSkladiste.setGraphic(imgView);
-			if(operator==null) {
-				sortirajSkladiste.setDisable(true);
-			}
-			input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\delete.png");
-			img=new Image(input);
-			imgView=new ImageView(img);
-			imgView.setFitHeight(30);
-			imgView.setFitWidth(30);
-			obrisiEntitet.setGraphic(imgView);
-			if(operator==null) {
-				obrisiEntitet.setDisable(true);
-			}
-			input=new FileInputStream("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\biceBolje\\aplikacija\\ikonice\\settings.png");
-			img=new Image(input);
-			imgView=new ImageView(img);
-			imgView.setFitHeight(30);
-			imgView.setFitWidth(30);
-			if(operator==null) {
-				fileConfig.setDisable(true);
-			}
-			fileConfig.setGraphic(imgView);
-			fileConfig.setOnAction(new FileConfigAction());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		
+		Image img = new Image("ikonice/download.png");
+		ImageView imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		ucitajSkladiste.setGraphic(imgView);
+		ucitajSkladiste.setOnAction(new UcitajSkladisteAction());
+		img = new Image("ikonice/attribute.png");
+		imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		ucitajAtribute.setGraphic(imgView);
+		ucitajAtribute.setOnAction(new UcitajAtributeAction());
+		if(operator==null) {
+			ucitajAtribute.setDisable(true);
 		}
+		img = new Image("ikonice/add.png");
+		imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		dodajEntitet.setGraphic(imgView);
+		dodajEntitet.setOnAction(new DodajEntitetAction());
+		if(operator==null) {
+			dodajEntitet.setDisable(true);
+		}
+		img = new Image("ikonice/search.png");
+		imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		pretraziSkladiste.setGraphic(imgView);
+		if(operator==null) {
+			pretraziSkladiste.setDisable(true);
+		}
+		img = new Image("ikonice/sort.png");
+		imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		sortirajSkladiste.setGraphic(imgView);
+		if(operator==null) {
+			sortirajSkladiste.setDisable(true);
+		}
+		img = new Image("ikonice/delete.png");
+		imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		obrisiEntitet.setGraphic(imgView);
+		if(operator==null) {
+			obrisiEntitet.setDisable(true);
+		}
+		img = new Image("ikonice/settings.png");
+		imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		if(operator==null) {
+			fileConfig.setDisable(true);
+		}
+		fileConfig.setGraphic(imgView);
+		fileConfig.setOnAction(new FileConfigAction());
 		
 		toolbar.getItems().add(ucitajSkladiste);
 		toolbar.getItems().add(new Separator());
