@@ -41,10 +41,20 @@ public abstract class FileOperator extends AbstractOperator {
 		return ucitaniEntiteti;
 	}
 	
+	/**
+	 * @param fajl Fajl iz koga se citaju entiteti u formatu konkretnog FileOperator
+	 * @return Lista entiteta koji su procitani iz fajla
+	 */
 	protected abstract List<Entitet> prevediFajl(File fajl);
 	
-	public abstract void prevediEntitet(Entitet entitet);
+	/**
+	 * @param entitet Entitet koji se ispise u formatu konkretnog FileOperator
+	 */
+	public abstract String prevediEntitet(Entitet entitet);
 	
+	/**
+	 * @param putanjaFajla Relativna putanja fajla u koji treba da se ispise deo baze, uzima se iz fajloviEntiteta promenljive. Dobjia se absolutna putanja preko putanja.resolve(putanjaFajla)
+	 */
 	protected abstract void ispisiFajl(Path putanjaFajla);
 	
 	protected Path fajlEntiteta(Entitet ent) {
@@ -110,9 +120,16 @@ public abstract class FileOperator extends AbstractOperator {
 		}
 	}
 	
+	/**
+	 * @param maxEntiteta Najvisi broj entiteta koji moze da se upise u bilo koji fajl u okviru baze
+	 */
 	public void setKonfiguracija(int maxEntiteta) {
 		maxBrojEntiteta=maxEntiteta;
 	}
 
-	protected abstract boolean validanFajl(Path putanjaFajla);
+	/**
+	 * @param fajl Fajl koji proveravamo da li je u korektnom formatu za implementaciju
+	 * @return true ako je fajl u dobrom formatu, false ako nije
+	 */
+	protected abstract boolean validanFajl(File fajl);
 }

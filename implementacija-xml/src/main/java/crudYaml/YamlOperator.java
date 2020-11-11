@@ -25,9 +25,9 @@ public class YamlOperator extends FileOperator {
 	}
 
 	@Override
-	public void prevediEntitet(Entitet entitet) {
+	public String prevediEntitet(Entitet entitet) {
 		try {
-			om.writeValue(System.out, entitet);
+			return om.writeValueAsString(entitet);
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -35,11 +35,11 @@ public class YamlOperator extends FileOperator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
-	protected boolean validanFajl(Path putanjaFajla) {
-		File fajl=putanjaFajla.toFile();
+	protected boolean validanFajl(File fajl) {
 		try {
 			Scanner reader=new Scanner(fajl);
 			String fileStart=reader.nextLine();

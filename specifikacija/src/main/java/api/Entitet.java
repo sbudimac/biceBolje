@@ -28,18 +28,27 @@ public class Entitet {
 		return atributi;
 	}
 	
+	/**
+	 * @param kljuc Kljuc koji odgovara vrednosti
+	 * @return Vrednost atributa
+	 */
 	public Object getAtribut(String kljuc) {
 		return atributi.get(kljuc);
 	}
 	
-	public void setAtribut(String kljuc, String vrednost) {
+	void setAtribut(String kljuc, String vrednost) {
 		atributi.remove(kljuc);
 		Object preradjenaVrednost = ParserPodataka.parse(vrednost);
 		if(preradjenaVrednost == null) return;
 		atributi.put(kljuc, preradjenaVrednost);
 	}
 	
-	public List<Entitet> nadjiUgnjezdene(){
+	void dodajUgnjezdeni(String kljuc, Entitet entitet) {
+		atributi.remove(kljuc);
+		atributi.put(kljuc, entitet);
+	}
+	
+	List<Entitet> nadjiUgnjezdene(){
 		List<Entitet> ugnjezdeni=new ArrayList<>();
 		for (Object atribut : atributi.values()) {
 			if(atribut instanceof Entitet) {
@@ -50,14 +59,6 @@ public class Entitet {
 			return ugnjezdeni;
 		}
 		return null;
-	}
-	
-	public void dodajAtribut(String key, Object value) {
-		atributi.put(key, value);
-	}
-	
-	public void obrisiAtribut(String key) {
-		atributi.remove(key);
 	}
 	
 	@Override

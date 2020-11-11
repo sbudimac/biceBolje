@@ -26,13 +26,12 @@ public class JsonOperator extends FileOperator {
 	}
 
 	@Override
-	public void prevediEntitet(Entitet entitet) {
-		System.out.println(gson.toJson(entitet));
+	public String prevediEntitet(Entitet entitet) {
+		return gson.toJson(entitet);
 	}
 
 	@Override
-	protected boolean validanFajl(Path putanjaFajla) {
-		File fajl=putanjaFajla.toFile();
+	protected boolean validanFajl(File fajl) {
 		try {
 			Scanner reader=new Scanner(fajl);
 			String fileStart=reader.nextLine();
@@ -51,7 +50,7 @@ public class JsonOperator extends FileOperator {
 
 	@Override
 	protected List<Entitet> prevediFajl(File fajl) {
-		if(validanFajl(fajl.toPath())) {
+		if(validanFajl(fajl)) {
 			try {
 				Reader reader = Files.newBufferedReader(fajl.toPath());
 				List<Entitet> entiteti = gson.fromJson(reader, new TypeToken<List<Entitet>>() {}.getType());
