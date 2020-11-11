@@ -136,22 +136,6 @@ public class MainView extends Stage {
 		show();
 	}
 	
-	public Button getUcitajAtribute() {
-		return ucitajAtribute;
-	}
-
-	public Button getDodajEntitet() {
-		return dodajEntitet;
-	}
-
-	public Button getPretraziSkladiste() {
-		return pretraziSkladiste;
-	}
-
-	public Button getObrisiEntitet() {
-		return obrisiEntitet;
-	}
-
 	public Button getFileConfig() {
 		return fileConfig;
 	}
