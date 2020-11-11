@@ -30,7 +30,7 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 		hbTf=new HBox(tfNaziv, tfId);
 		
 		ok=new Button("ok");
-		ok.setOnAction(new DodavanjeEntitetaAction(tfNaziv, tfId));
+		ok.setOnAction(new DodavanjeEntitetaAction(tfNaziv, tfId, this));
 		cancel=new Button("Cancel");
 		cancel.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
@@ -55,5 +55,8 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 		tfNaziv=new TextField();
 		tfId=new TextField(id);
 	}
-
+	
+	public Button getOk() {
+		return ok;
+	}
 }

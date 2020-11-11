@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class DodajKoloneAction implements EventHandler<ActionEvent> {
@@ -70,6 +71,8 @@ public class DodajKoloneAction implements EventHandler<ActionEvent> {
 		for (CheckBox atribut : atributi) {
 			atribut.setSelected(false);
 		}
+		Stage stage=(Stage)dialog.getOk().getScene().getWindow();
+		stage.close();
 	}
 
 }

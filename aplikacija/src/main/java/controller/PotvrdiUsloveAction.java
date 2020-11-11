@@ -11,6 +11,7 @@ import gui.FilterGUI;
 import gui.MainView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.Stage;
 
 public class PotvrdiUsloveAction implements EventHandler<ActionEvent> {
 private FilterDialog dialog;
@@ -29,6 +30,8 @@ private FilterDialog dialog;
 		}
 		entiteti=MainView.getInstance().getSkladiste().pretrazi(filtriranja);
 		MainView.getInstance().popuniTabelu(entiteti);
+		Stage stage=(Stage)dialog.getOk().getScene().getWindow();
+		stage.close();
 	}
 
 }

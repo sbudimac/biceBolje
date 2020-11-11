@@ -111,4 +111,8 @@ public class FilterDialog extends Dialog<List<Uslov>> {
 	public Set<FilterGUI> getRedovi(){
 		return redovi;
 	}
+	
+	public Button getOk() {
+		return ok;
+	}
 }

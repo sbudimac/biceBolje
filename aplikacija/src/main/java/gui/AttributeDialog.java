@@ -41,6 +41,10 @@ public class AttributeDialog extends Dialog<Boolean> {
 		return boxovi;
 	}
 	
+	public Button getOk() {
+		return ok;
+	}
+	
 	public AttributeDialog() {
 		super();
 		BorderPane pozadina=new BorderPane();
