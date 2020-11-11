@@ -52,8 +52,30 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 	public DodavanjeEntitetaDialog(String id) {
 		this.id=id;
 		
+		BorderPane pozadina=new BorderPane();
+		
 		tfNaziv=new TextField();
 		tfId=new TextField(id);
+		hbTf=new HBox(tfNaziv, tfId);
+		
+		ok=new Button("ok");
+		ok.setOnAction(new DodavanjeEntitetaAction(tfNaziv, tfId, this));
+		cancel=new Button("Cancel");
+		cancel.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				Stage stage=(Stage)cancel.getScene().getWindow();
+				stage.close();
+			}
+		});
+		hbBt=new HBox(ok, cancel);
+		
+		pozadina.setCenter(hbTf);
+		pozadina.setBottom(hbBt);
+		
+		getDialogPane().setContent(pozadina);
+		getDialogPane().setPrefWidth(200);
+		getDialogPane().setPrefHeight(100);
+		setTitle("Odabir uslova pretrage");
 	}
 	
 	public Button getOk() {

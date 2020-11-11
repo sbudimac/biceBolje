@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Optional;
+import java.util.Random;
 
 import gui.DodavanjeEntitetaDialog;
 import javafx.event.ActionEvent;
@@ -27,7 +28,7 @@ public class DodajEntitetAction implements EventHandler<ActionEvent> {
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == automatski){
-			DodavanjeEntitetaDialog dialog=new DodavanjeEntitetaDialog();
+			DodavanjeEntitetaDialog dialog=new DodavanjeEntitetaDialog(generateId());
 			dialog.showAndWait();
 		} else if (result.get() == rucno) {
 			DodavanjeEntitetaDialog dialog=new DodavanjeEntitetaDialog();
@@ -35,6 +36,15 @@ public class DodajEntitetAction implements EventHandler<ActionEvent> {
 		} else {
 		    // ... cancel
 		}
+	}
+	
+	private String generateId() {
+		Random r=new Random();
+		int left=97;
+		int right=122;
+		int len=r.nextInt((16-4)+1)+4;
+		String id=r.ints(left, right+1).limit(len).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+		return id;
 	}
 
 }
