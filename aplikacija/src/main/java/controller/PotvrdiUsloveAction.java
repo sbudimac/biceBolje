@@ -1,11 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import api.Entitet;
-import api.Uslov;
 import gui.FilterDialog;
 import gui.FilterGUI;
 import gui.MainView;
@@ -22,13 +20,16 @@ private FilterDialog dialog;
 	@Override
 	public void handle(ActionEvent event) {
 		Set<FilterGUI> uslovi=dialog.getRedovi();
-		List<Uslov> filtriranja=new ArrayList<>();
-		List<Entitet> entiteti;
+		Predicate<Entitet> predikat = null;
 		for (FilterGUI uslov : uslovi) {
-			filtriranja.add(uslov.getUslov());
+			if(predikat == null) {
+				predikat = uslov.getUslov();
+			} else {
+				predikat.and(uslov.getUslov());
+			}
 		}
-		entiteti=MainView.getInstance().getSkladiste().pretrazi(filtriranja);
-		MainView.getInstance().popuniTabelu(entiteti);
+		MainView.getInstance().getFiltriraniEntiteti().setPredicate(predikat);
+		//MainView.getInstance().getSortiraniEntiteti().setPredicate(predikat);
 	}
 
 }

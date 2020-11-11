@@ -14,15 +14,15 @@ public class AttributeComparator implements Comparator<String> {
 			return rez;
 		}
 		if(prvi instanceof String && drugi instanceof String) {
-			rez=s1.compareTo(s2);
+			rez=s2.compareTo(s1);
 		}else if(prvi instanceof Number && drugi instanceof Number) {
 			Number op1=(Number)prvi;
 			Number op2=(Number)drugi;
-			rez=BrojevniPomagac.getInstance().uporedi(op1, op2);
+			rez=BrojevniPomagac.getInstance().uporedi(op2, op1);
 		}else if(prvi instanceof LocalDateTime && drugi instanceof LocalDateTime) {
 			LocalDateTime op1=(LocalDateTime)prvi;
 			LocalDateTime op2=(LocalDateTime)drugi;
-			rez=op1.compareTo(op2);
+			rez=op2.compareTo(op1);
 		}
 		return rez;
 	}

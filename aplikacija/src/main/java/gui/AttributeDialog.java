@@ -18,7 +18,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class AttributeDialog extends Dialog<Boolean> {	
+public class AttributeDialog extends Dialog<Boolean> {
+	
 	private TextField pretrazivac;
 	private HBox pretraga;
 	private List<CheckBox> atributi;
@@ -27,7 +28,6 @@ public class AttributeDialog extends Dialog<Boolean> {
 	private HBox buttons;
 	private Button ok;
 	private Button close;
-	
 	
 	public CheckBox getCustomAtribut() {
 		return customAtribut;
@@ -41,7 +41,7 @@ public class AttributeDialog extends Dialog<Boolean> {
 		return boxovi;
 	}
 	
-	public AttributeDialog() {
+	public AttributeDialog(Set<String> kljucevi) {
 		super();
 		BorderPane pozadina=new BorderPane();
 		
@@ -53,7 +53,6 @@ public class AttributeDialog extends Dialog<Boolean> {
 		pozadina.setTop(pretraga);
 		
 		atributi=new ArrayList<CheckBox>();
-		Set<String> kljucevi=MainView.getInstance().getSkladiste().getKljucevi();
 		for (String kljuc : kljucevi) {
 			atributi.add(new CheckBox(kljuc));
 		}

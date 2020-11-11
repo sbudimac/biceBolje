@@ -38,7 +38,6 @@ public class UcitajUSkladisteAction implements EventHandler<ActionEvent> {
 				}else if(result.get().equals("Yaml")) {
 					view.getSkladiste().setOperator(new YamlOperator(selectedFile.getAbsolutePath()));
 				}
-				view.popuniTabelu(view.getSkladiste().getEntiteti());
 			}
 		}
 		view.getFileConfig().setDisable(false);
