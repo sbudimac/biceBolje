@@ -20,6 +20,10 @@ public class Skladiste {
 		return entiteti;
 	}
 	
+	public void setEntiteti(List<Entitet> entiteti) {
+		this.entiteti = entiteti;
+	}
+	
 	public Set<String> getKljucevi(){
 		return kljucevi;
 	}

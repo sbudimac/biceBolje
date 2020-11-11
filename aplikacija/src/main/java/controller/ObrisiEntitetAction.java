@@ -17,7 +17,6 @@ public class ObrisiEntitetAction implements EventHandler<ActionEvent> {
 		for (Entitet entitet : entiteti) {
 			MainView.getInstance().getSkladiste().brisi(entitet);
 		}
-		MainView.getInstance().popuniTabelu(MainView.getInstance().getSkladiste().getEntiteti());
 	}
 
 }

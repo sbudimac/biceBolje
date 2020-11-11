@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.List;
-
 import api.Entitet;
 import api.Skladiste;
 import controller.DodajEntitetAction;
@@ -10,6 +8,10 @@ import controller.FiltriranjeEntitetaAction;
 import controller.ObrisiEntitetAction;
 import controller.UcitajAtributeAction;
 import controller.UcitajUSkladisteAction;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
@@ -27,14 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class MainView extends Stage {
 	private static MainView instance=null;
 	private Skladiste skladiste = new Skladiste();
-
-	public Skladiste getSkladiste() {
-		return skladiste;
-	}
-
-	public void setSkladiste(Skladiste skladiste) {
-		this.skladiste = skladiste;
-	}
+	private FilteredList<Entitet> filtriraniEntiteti;
 
 	private Button ucitajUSkladiste;
 	private Button ucitajAtribute;
@@ -112,6 +107,14 @@ public class MainView extends Stage {
 		pozadina.setTop(meni);
 				
 		tabela=new TableView<Entitet>();
+		ObservableList<Entitet> entiteti = FXCollections.observableList(skladiste.getEntiteti());
+		skladiste.setEntiteti(entiteti);
+		filtriraniEntiteti = new FilteredList<Entitet>(entiteti, p -> true);
+		SortedList<Entitet> sortiraniEntiteti = new SortedList<Entitet>(filtriraniEntiteti);
+		sortiraniEntiteti.comparatorProperty().bind(tabela.comparatorProperty());
+		
+		tabela.setItems(sortiraniEntiteti);
+		
 		tabela.setEditable(true);
 		tabela.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		TableColumn<Entitet, String> colId=new TableColumn<>("Id");
@@ -133,22 +136,6 @@ public class MainView extends Stage {
 		show();
 	}
 	
-	public Button getUcitajAtribute() {
-		return ucitajAtribute;
-	}
-
-	public Button getDodajEntitet() {
-		return dodajEntitet;
-	}
-
-	public Button getPretraziSkladiste() {
-		return pretraziSkladiste;
-	}
-
-	public Button getObrisiEntitet() {
-		return obrisiEntitet;
-	}
-
 	public Button getFileConfig() {
 		return fileConfig;
 	}
@@ -156,14 +143,18 @@ public class MainView extends Stage {
 	public TableView<Entitet> getTabela() {
 		return tabela;
 	}
-
-	public void setTabela(TableView<Entitet> tabela) {
-		this.tabela = tabela;
-	}
 	
-	public void popuniTabelu(List<Entitet> entiteti) {
+	/*public void popuniTabelu(List<Entitet> entiteti) {
 		tabela.getItems().clear();
 		tabela.getItems().addAll(entiteti);
+	}*/
+
+	public FilteredList<Entitet> getFiltriraniEntiteti() {
+		return filtriraniEntiteti;
+	}
+
+	public Skladiste getSkladiste() {
+		return skladiste;
 	}
 
 	public static MainView getInstance() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import controller.CustomAtributListener;
 import controller.DodajKoloneAction;
 import controller.FiltrirajAtributeListener;
 import javafx.event.ActionEvent;
@@ -18,7 +19,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class AttributeDialog extends Dialog<Boolean> {	
+public class AttributeDialog extends Dialog<Boolean> {
+	
 	private TextField pretrazivac;
 	private HBox pretraga;
 	private List<CheckBox> atributi;
@@ -27,7 +29,6 @@ public class AttributeDialog extends Dialog<Boolean> {
 	private HBox buttons;
 	private Button ok;
 	private Button close;
-	
 	
 	public CheckBox getCustomAtribut() {
 		return customAtribut;
@@ -41,32 +42,33 @@ public class AttributeDialog extends Dialog<Boolean> {
 		return boxovi;
 	}
 	
+<<<<<<< HEAD
 	public Button getOk() {
 		return ok;
 	}
 	
 	public AttributeDialog() {
+=======
+	public AttributeDialog(Set<String> kljucevi) {
+>>>>>>> branch 'master' of https://github.com/sbudimac/biceBolje.git
 		super();
 		BorderPane pozadina=new BorderPane();
 		
 		pretrazivac=new TextField();
-		pretrazivac.textProperty().addListener(new FiltrirajAtributeListener(this));
+		pretrazivac.textProperty().addListener(new FiltrirajAtributeListener(this, kljucevi));
 		pretraga=new HBox(20);
 		pretraga.getChildren().add(pretrazivac);
 		pretraga.setAlignment(Pos.CENTER);
 		pozadina.setTop(pretraga);
 		
 		atributi=new ArrayList<CheckBox>();
-		Set<String> kljucevi=MainView.getInstance().getSkladiste().getKljucevi();
 		for (String kljuc : kljucevi) {
 			atributi.add(new CheckBox(kljuc));
 		}
-		customAtribut=new CheckBox();
-		customAtribut.setVisible(false);
-		customAtribut.setManaged(false);
-		atributi.add(customAtribut);
+		
 		boxovi=new VBox();
 		boxovi.getChildren().addAll(atributi);
+		dodajNoviAtribut();
 		boxovi.setAlignment(Pos.CENTER);
 		pozadina.setCenter(boxovi);
 		
@@ -88,5 +90,13 @@ public class AttributeDialog extends Dialog<Boolean> {
 		getDialogPane().setPrefWidth(200);
 		getDialogPane().setPrefHeight(600);
 		setTitle("Selekcija atributa entiteta");
+	}
+	
+	public void dodajNoviAtribut() {
+		customAtribut=new CheckBox();
+		customAtribut.setVisible(false);
+		customAtribut.setManaged(false);
+		customAtribut.selectedProperty().addListener(new CustomAtributListener(this, customAtribut));
+		boxovi.getChildren().add(customAtribut);
 	}
 }
