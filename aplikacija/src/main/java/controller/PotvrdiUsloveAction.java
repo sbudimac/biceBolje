@@ -29,15 +29,10 @@ private FilterDialog dialog;
 				predikat.and(uslov.getUslov());
 			}
 		}
-<<<<<<< HEAD
-		entiteti=MainView.getInstance().getSkladiste().pretrazi(filtriranja);
-		MainView.getInstance().popuniTabelu(entiteti);
-		Stage stage=(Stage)dialog.getOk().getScene().getWindow();
-		stage.close();
-=======
 		MainView.getInstance().getFiltriraniEntiteti().setPredicate(predikat);
 		//MainView.getInstance().getSortiraniEntiteti().setPredicate(predikat);
->>>>>>> branch 'master' of https://github.com/sbudimac/biceBolje.git
+		Stage stage=(Stage)dialog.getOk().getScene().getWindow();
+		stage.close();
 	}
 
 }

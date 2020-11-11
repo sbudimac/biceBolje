@@ -42,15 +42,11 @@ public class AttributeDialog extends Dialog<Boolean> {
 		return boxovi;
 	}
 	
-<<<<<<< HEAD
 	public Button getOk() {
 		return ok;
 	}
 	
-	public AttributeDialog() {
-=======
 	public AttributeDialog(Set<String> kljucevi) {
->>>>>>> branch 'master' of https://github.com/sbudimac/biceBolje.git
 		super();
 		BorderPane pozadina=new BorderPane();
 		
