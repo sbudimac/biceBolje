@@ -12,8 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
-	private String id;
-	
 	private TextField tfNaziv;
 	private TextField tfId;
 	private HBox hbTf;
@@ -50,8 +48,6 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 	}
 	
 	public DodavanjeEntitetaDialog(String id) {
-		this.id=id;
-		
 		BorderPane pozadina=new BorderPane();
 		
 		tfNaziv=new TextField();
