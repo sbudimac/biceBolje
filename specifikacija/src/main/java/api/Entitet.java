@@ -90,8 +90,8 @@ public class Entitet {
 	public String toString() {
 		String polja="";
 		for(Map.Entry<String, Object> atribut : atributi.entrySet()) {
-			polja+="Kljuc: "+atribut.getKey()+" Vrednost: "+atribut.getValue();
+			polja+="; Kljuc: "+atribut.getKey()+"; Vrednost: "+atribut.getValue();
 		}
-		return "Naziv: "+this.naziv+" Id: "+this.id+" Atributi: "+polja; 
+		return "Naziv: "+this.naziv+"; Id: "+this.id+polja+"\n";
 	}
 }

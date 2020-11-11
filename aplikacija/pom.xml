@@ -18,6 +18,11 @@
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
+  		<groupId>com.komponente</groupId>
+  		<artifactId>implementacija-custom</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
   		<groupId>org.openjfx</groupId>
     	<artifactId>javafx-controls</artifactId>
     	<version>14</version>

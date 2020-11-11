@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import crudCustom.CustomOperator;
 import crudJson.JsonOperator;
 import crudYaml.YamlOperator;
 import gui.MainView;
@@ -37,6 +38,8 @@ public class UcitajUSkladisteAction implements EventHandler<ActionEvent> {
 					view.getSkladiste().setOperator(new JsonOperator(selectedFile.getAbsolutePath()));
 				}else if(result.get().equals("Yaml")) {
 					view.getSkladiste().setOperator(new YamlOperator(selectedFile.getAbsolutePath()));
+				}else if(result.get().equals("Custom")) {
+					view.getSkladiste().setOperator(new CustomOperator(selectedFile.getAbsolutePath()));
 				}
 			}
 		}

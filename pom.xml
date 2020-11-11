@@ -9,6 +9,7 @@
   	<module>implementacija-json</module>
   	<module>aplikacija</module>
   	<module>implementacija-xml</module>
+  	<module>implementacija-custom</module>
   </modules>
   <build>
   <pluginManagement>
