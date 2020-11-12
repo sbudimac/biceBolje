@@ -15,13 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class FilterDialog extends Dialog<List<Uslov>> {
+public class FilterDialog extends Dialog<List<Uslov>> {	
 	private Set<String> listaKljuceva;
 	
 	private VBox sviUslovi;
@@ -103,7 +104,15 @@ public class FilterDialog extends Dialog<List<Uslov>> {
 		cbSpoljasnji.setManaged(false);
 		spoljasnjiKljucevi.add(cbSpoljasnji);
 		
-		FilterGUI uslov=new FilterGUI(cbKljuc, cbUslov, tf, cb, cbSpoljasnji);
+		Label lbKljucevi=new Label("Kljucevi: ");
+		Label lbOperacije=new Label("Operacije: ");
+		Label lbUslov=new Label("Uslov");
+		Label lbUgnjezden=new Label("Ugnjezden?: ");
+		Label lbSpoljasnjiKljucevi=new Label("Spoljasnji kljucevi: ");
+		lbSpoljasnjiKljucevi.setVisible(false);
+		lbSpoljasnjiKljucevi.setManaged(false);
+		
+		FilterGUI uslov=new FilterGUI(lbKljucevi, lbOperacije, lbUslov, lbUgnjezden, lbSpoljasnjiKljucevi, cbKljuc, cbUslov, tf, cb, cbSpoljasnji);
 		redovi.add(uslov);
 		sviUslovi.getChildren().addAll(uslov);
 	}

@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 
 public class AttributeDialog extends Dialog<Boolean> {
 	
+	private Label lbPretrazivac;
 	private TextField pretrazivac;
 	private HBox pretraga;
 	private List<CheckBox> atributi;
@@ -50,10 +52,11 @@ public class AttributeDialog extends Dialog<Boolean> {
 		super();
 		BorderPane pozadina=new BorderPane();
 		
+		lbPretrazivac=new Label("Filter atributa:");
 		pretrazivac=new TextField();
 		pretrazivac.textProperty().addListener(new FiltrirajAtributeListener(this, kljucevi));
 		pretraga=new HBox(20);
-		pretraga.getChildren().add(pretrazivac);
+		pretraga.getChildren().addAll(lbPretrazivac, pretrazivac);
 		pretraga.setAlignment(Pos.CENTER);
 		pozadina.setTop(pretraga);
 		
@@ -83,7 +86,7 @@ public class AttributeDialog extends Dialog<Boolean> {
 		pozadina.setBottom(buttons);
 		
 		getDialogPane().setContent(pozadina);
-		getDialogPane().setPrefWidth(200);
+		getDialogPane().setPrefWidth(400);
 		getDialogPane().setPrefHeight(600);
 		setTitle("Selekcija atributa entiteta");
 	}

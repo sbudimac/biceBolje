@@ -6,12 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
+	private Label lbNaziv;
+	private Label lbId;
 	private TextField tfNaziv;
 	private TextField tfId;
 	private HBox hbTf;
@@ -23,9 +26,11 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 	public DodavanjeEntitetaDialog() {
 		BorderPane pozadina=new BorderPane();
 		
+		lbNaziv=new Label("Naziv entiteta: ");
+		lbId=new Label("Id entiteta: ");
 		tfNaziv=new TextField();
 		tfId=new TextField();
-		hbTf=new HBox(tfNaziv, tfId);
+		hbTf=new HBox(lbNaziv, tfNaziv, lbId, tfId);
 		
 		ok=new Button("ok");
 		ok.setOnAction(new DodavanjeEntitetaAction(tfNaziv, tfId, this));
@@ -42,7 +47,7 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 		pozadina.setBottom(hbBt);
 		
 		getDialogPane().setContent(pozadina);
-		getDialogPane().setPrefWidth(200);
+		getDialogPane().setPrefWidth(500);
 		getDialogPane().setPrefHeight(100);
 		setTitle("Odabir uslova pretrage");
 	}
@@ -50,9 +55,11 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 	public DodavanjeEntitetaDialog(String id) {
 		BorderPane pozadina=new BorderPane();
 		
+		lbNaziv=new Label("Naziv entiteta: ");
+		lbId=new Label("Id entiteta: ");
 		tfNaziv=new TextField();
 		tfId=new TextField(id);
-		hbTf=new HBox(tfNaziv, tfId);
+		hbTf=new HBox(lbNaziv, tfNaziv, lbId, tfId);
 		
 		ok=new Button("ok");
 		ok.setOnAction(new DodavanjeEntitetaAction(tfNaziv, tfId, this));
@@ -69,7 +76,7 @@ public class DodavanjeEntitetaDialog extends Dialog<Entitet> {
 		pozadina.setBottom(hbBt);
 		
 		getDialogPane().setContent(pozadina);
-		getDialogPane().setPrefWidth(200);
+		getDialogPane().setPrefWidth(500);
 		getDialogPane().setPrefHeight(100);
 		setTitle("Odabir uslova pretrage");
 	}
