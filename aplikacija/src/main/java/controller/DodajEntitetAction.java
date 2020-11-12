@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import gui.DodavanjeEntitetaDialog;
+import gui.DodavanjeUgnjezdenogDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -22,9 +23,10 @@ public class DodajEntitetAction implements EventHandler<ActionEvent> {
 
 		ButtonType automatski = new ButtonType("Automatski");
 		ButtonType rucno = new ButtonType("Rucno");
+		ButtonType ugnjezden = new ButtonType("Ugnjezden");
 		ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 
-		alert.getButtonTypes().setAll(automatski, rucno, cancel);
+		alert.getButtonTypes().setAll(automatski, rucno, ugnjezden, cancel);
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == automatski){
@@ -33,8 +35,9 @@ public class DodajEntitetAction implements EventHandler<ActionEvent> {
 		} else if (result.get() == rucno) {
 			DodavanjeEntitetaDialog dialog=new DodavanjeEntitetaDialog();
 			dialog.showAndWait();
-		} else {
-		    // ... cancel
+		} else if(result.get() == ugnjezden){
+		    DodavanjeUgnjezdenogDialog dialog=new DodavanjeUgnjezdenogDialog();
+		    dialog.showAndWait();
 		}
 	}
 	
