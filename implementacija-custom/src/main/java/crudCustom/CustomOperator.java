@@ -51,7 +51,11 @@ public class CustomOperator extends FileOperator {
 		
 		Map<String, Object> mapa = new HashMap<>();
 		
-		tekst = atributi[2];
+		if(atributi.length < 3) {
+			tekst = "";
+		} else {
+			tekst = atributi[2];
+		}
 		int indeks = tekst.indexOf(';');
 		while(indeks != -1) {
 			int indeksUgnjezdenog = tekst.indexOf('{');
@@ -86,7 +90,11 @@ public class CustomOperator extends FileOperator {
 		
 		Map<String, Object> mapa = new HashMap<>();
 		
-		tekst = atributi[2];
+		if(atributi.length < 3) {
+			tekst = "";
+		} else {
+			tekst = atributi[2];
+		}
 		int indeks = tekst.indexOf(';');
 		int indeksZatvora = tekst.indexOf('}');
 		while(indeks != -1 && indeks < indeksZatvora) {
