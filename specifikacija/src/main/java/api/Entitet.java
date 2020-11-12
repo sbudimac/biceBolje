@@ -52,14 +52,14 @@ public class Entitet {
 		return atributi.get(kljuc);
 	}
 	
-	public void setAtribut(String kljuc, String vrednost) {
+	void setAtribut(String kljuc, String vrednost) {
 		atributi.remove(kljuc);
 		Object preradjenaVrednost = ParserPodataka.parse(vrednost);
 		if(preradjenaVrednost == null) return;
 		atributi.put(kljuc, preradjenaVrednost);
 	}
 	
-	public void dodajUgnjezdeni(String kljuc, Entitet entitet) {
+	void dodajUgnjezdeni(String kljuc, Entitet entitet) {
 		atributi.remove(kljuc);
 		atributi.put(kljuc, entitet);
 	}
