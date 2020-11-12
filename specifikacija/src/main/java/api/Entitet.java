@@ -113,6 +113,6 @@ public class Entitet {
 				polja += atribut.getValue().toString() + ";";
 			}
 		}
-		return "Naziv: "+this.naziv+"; Id: "+this.id+polja;
+		return "Naziv: "+this.naziv+"; Id: "+this.id + ";" +polja;
 	}
 }
