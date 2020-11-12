@@ -1,5 +1,9 @@
 package app;
 
+import api.Entitet;
+import api.FileOperator;
+import api.Skladiste;
+import crudCustom.CustomOperator;
 import gui.MainView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -9,45 +13,34 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		
-		
-		/*FileOperator operator=new JsonOperator("C:\\Users\\Stefan\\Desktop\\RAF\\5. semestar\\Softverske komponente\\testovi");
-
+		/*Skladiste skladiste = new Skladiste();
+		skladiste.setOperator(new CustomOperator("C:\\Users\\andro\\OneDrive\\Desktop\\testiranjeCUSTOM"));
         Entitet gupsi=new Entitet("Gupsi", "ooooo");
-        gupsi.dodajAtribut("Indeks", "RN3/18");
-        gupsi.dodajAtribut("Smer", "Racunarske nauke");
-        gupsi.dodajAtribut("Ocena", 5);
+        gupsi.setAtribut("Indeks", "RN3/18");
+        gupsi.setAtribut("Smer", "Racunarske nauke");
+        gupsi.setAtribut("Ocena", "5");
         Entitet buda=new Entitet("Buda", "meathead");
-        buda.dodajAtribut("Indeks", "RN5/18");
-        buda.dodajAtribut("Smer", "Racunarske nauke");
-        buda.dodajAtribut("Ocena", 9);
+        buda.setAtribut("Indeks", "RN5/18");
+        buda.setAtribut("Smer", "Racunarske nauke");
+        buda.setAtribut("Ocena", "9");
         Entitet gale=new Entitet("Gale", "stipendista");
-        gale.dodajAtribut("Indeks", "RN2/18");
-        gale.dodajAtribut("Smer", "Racunarske nauke");
-        gale.dodajAtribut("Ocena", 10);
+        gale.setAtribut("Indeks", "RN2/18");
+        gale.setAtribut("Smer", "Racunarske nauke");
+        gale.setAtribut("Ocena", "10");
         Entitet cmoki=new Entitet("Cmoki", "gospoda");
-        cmoki.dodajAtribut("Indeks", "RI4/18");
-        cmoki.dodajAtribut("Smer", "Racunarsko inzenjerstvo");
-        cmoki.dodajAtribut("Ocena", 6);
+        cmoki.dodajUgnjezdeni("tim1", gupsi);
+        cmoki.dodajUgnjezdeni("tim2", buda);
+        cmoki.setAtribut("Indeks", "RI4/18");
+        cmoki.setAtribut("Smer", "Racunarsko inzenjerstvo");
+        cmoki.setAtribut("Ocena", "6");
 
-        operator.dodajEntitet(gupsi);
-        operator.dodajEntitet(buda);
-        operator.dodajEntitet(gale);
-        operator.dodajEntitet(cmoki);
-
-        Uslov uslov = UslovFactory.KreirajUslov("Indeks", Operacija.POCINJE_SA, "RI");
-        List<Uslov> uslovi=new ArrayList<>();
-        uslovi.add(uslov);
-        List<Entitet> rez=operator.pretrazi(uslovi);
-        uslovi.clear();
-        
-        Uslov uslov2 = UslovFactory.KreirajUslov("Ocena", Operacija.JEDNAKO, "5");
-        uslovi.add(uslov2);
-        rez=operator.pretrazi(uslovi);
-        List<String> kriterijumi = new ArrayList<>();
-        kriterijumi.add("Ocena");
-        operator.sortiraj(kriterijumi, rez);
-        //operator.brisi(uslovi);
-		*/
+        skladiste.dodajEntitet(gale);
+        skladiste.dodajEntitet(cmoki);
+		
+		FileOperator fileOperator = (FileOperator)skladiste.getOperator();
+		for(Entitet e : skladiste.getEntiteti()) {
+			System.out.println(fileOperator.prevediEntitet(e));
+		}*/
 	}
 
 	@Override

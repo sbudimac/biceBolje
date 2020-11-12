@@ -10,10 +10,26 @@ public class Entitet {
 	private String id;
 	private Map<String, Object> atributi;
 		
+	/**
+	 * @param naziv Tip entiteta koji oznacava koji drugi entiteti su mu slicni
+	 * @param id Identifikator entiteta koji jedinstveno predstavlja entitet u bazi
+	 */
 	public Entitet(String naziv, String id) {
 		this.naziv=naziv;
 		this.id=id;
 		atributi=new HashMap<String, Object>();
+	}
+	
+	/**
+	 * Ovaj konstruktor se koristi kod kreiranja entiteta u okviru Operatora i mozda u okviru dijaloga
+	 * @param naziv Tip entiteta koji oznacava koji drugi entiteti su mu slicni
+	 * @param id Identifikator entiteta koji jedinstveno predstavlja entitet u bazi
+	 * @param atributi Mapa vec dodatih atributa
+	 */
+	public Entitet(String naziv, String id, Map<String, Object> atributi) {
+		this.naziv=naziv;
+		this.id=id;
+		this.atributi=atributi;
 	}
 	
 	public String getNaziv() {
@@ -36,14 +52,14 @@ public class Entitet {
 		return atributi.get(kljuc);
 	}
 	
-	void setAtribut(String kljuc, String vrednost) {
+	public void setAtribut(String kljuc, String vrednost) {
 		atributi.remove(kljuc);
 		Object preradjenaVrednost = ParserPodataka.parse(vrednost);
 		if(preradjenaVrednost == null) return;
 		atributi.put(kljuc, preradjenaVrednost);
 	}
 	
-	void dodajUgnjezdeni(String kljuc, Entitet entitet) {
+	public void dodajUgnjezdeni(String kljuc, Entitet entitet) {
 		atributi.remove(kljuc);
 		atributi.put(kljuc, entitet);
 	}
@@ -90,8 +106,13 @@ public class Entitet {
 	public String toString() {
 		String polja="";
 		for(Map.Entry<String, Object> atribut : atributi.entrySet()) {
-			polja+="; Kljuc: "+atribut.getKey()+"; Vrednost: "+atribut.getValue();
+			polja+=" "+atribut.getKey()+": ";
+			if(atribut.getValue() instanceof Entitet) {
+				polja += "{ " + atribut.getValue().toString() + " }";
+			} else {
+				polja += atribut.getValue().toString() + ";";
+			}
 		}
-		return "Naziv: "+this.naziv+"; Id: "+this.id+polja+"\n";
+		return "Naziv: "+this.naziv+"; Id: "+this.id+polja;
 	}
 }
