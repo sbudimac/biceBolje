@@ -20,9 +20,10 @@ public class FileConfigAction implements EventHandler<ActionEvent> {
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()){
 			FileOperator operator=(FileOperator) MainView.getInstance().getSkladiste().getOperator();
-			operator.setKonfiguracija(Integer.parseInt(result.get()));
+			if(operator!=null) {
+				operator.setKonfiguracija(Integer.parseInt(result.get()));
+			}
 		}
-		result.ifPresent(name -> System.out.println("Your name: " + name));
 	}
 	
 }
