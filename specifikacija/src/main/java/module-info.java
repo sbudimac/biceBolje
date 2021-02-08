@@ -1,0 +1,3 @@
+module specifikacija {
+	exports api;
+}

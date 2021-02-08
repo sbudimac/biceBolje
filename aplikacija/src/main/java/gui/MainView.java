@@ -53,40 +53,22 @@ public class MainView extends Stage {
 		obrisiEntitet=new Button();
 		fileConfig=new Button();
 		
-		Image img = new Image("ikonice/download.png");
-		ImageView imgView=new ImageView(img);
-		imgView.setFitHeight(30);
-		imgView.setFitWidth(30);
+		ImageView imgView = loadImage(this.getClass().getResource(("/ikonice/download.png")).toString());
 		ucitajUSkladiste.setGraphic(imgView);
 		ucitajUSkladiste.setOnAction(new UcitajUSkladisteAction());
-		img = new Image("ikonice/attribute.png");
-		imgView=new ImageView(img);
-		imgView.setFitHeight(30);
-		imgView.setFitWidth(30);
+		imgView = loadImage(this.getClass().getResource(("/ikonice/attribute.png")).toString());
 		ucitajAtribute.setGraphic(imgView);
 		ucitajAtribute.setOnAction(new UcitajAtributeAction());
-		img = new Image("ikonice/add.png");
-		imgView=new ImageView(img);
-		imgView.setFitHeight(30);
-		imgView.setFitWidth(30);
+		imgView = loadImage(this.getClass().getResource(("/ikonice/add.png")).toString());
 		dodajEntitet.setGraphic(imgView);
 		dodajEntitet.setOnAction(new DodajEntitetAction());
-		img = new Image("ikonice/search.png");
-		imgView=new ImageView(img);
-		imgView.setFitHeight(30);
-		imgView.setFitWidth(30);
+		imgView = loadImage(this.getClass().getResource(("/ikonice/search.png")).toString());
 		pretraziSkladiste.setGraphic(imgView);
 		pretraziSkladiste.setOnAction(new FiltriranjeEntitetaAction());
-		img = new Image("ikonice/delete.png");
-		imgView=new ImageView(img);
-		imgView.setFitHeight(30);
-		imgView.setFitWidth(30);
+		imgView = loadImage(this.getClass().getResource(("/ikonice/delete.png")).toString());
 		obrisiEntitet.setGraphic(imgView);
 		obrisiEntitet.setOnAction(new ObrisiEntitetAction());
-		img = new Image("ikonice/settings.png");
-		imgView=new ImageView(img);
-		imgView.setFitHeight(30);
-		imgView.setFitWidth(30);
+		imgView = loadImage(this.getClass().getResource(("/ikonice/settings.png")).toString());
 		fileConfig.setGraphic(imgView);
 		fileConfig.setOnAction(new FileConfigAction());
 		
@@ -136,6 +118,14 @@ public class MainView extends Stage {
 		show();
 	}
 	
+	private ImageView loadImage(String imgPath) {
+		Image img = new Image(imgPath);
+		ImageView imgView=new ImageView(img);
+		imgView.setFitHeight(30);
+		imgView.setFitWidth(30);
+		return imgView;
+	}
+	
 	public Button getFileConfig() {
 		return fileConfig;
 	}
@@ -143,11 +133,6 @@ public class MainView extends Stage {
 	public TableView<Entitet> getTabela() {
 		return tabela;
 	}
-	
-	/*public void popuniTabelu(List<Entitet> entiteti) {
-		tabela.getItems().clear();
-		tabela.getItems().addAll(entiteti);
-	}*/
 
 	public FilteredList<Entitet> getFiltriraniEntiteti() {
 		return filtriraniEntiteti;
